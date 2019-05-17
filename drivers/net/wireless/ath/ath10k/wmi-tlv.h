@@ -1877,6 +1877,7 @@ struct wmi_tlv_vdev_stats {
 } __packed;
 
 struct wmi_tlv_pktlog_enable {
+	__le32 pdev_id;
 	__le32 reserved;
 	__le32 filter;
 } __packed;

@@ -2835,6 +2835,8 @@ ath10k_wmi_tlv_op_gen_pktlog_enable(struct ath10k *ar, u32 filter)
 	tlv->len = __cpu_to_le16(sizeof(*cmd));
 	cmd = (void *)tlv->value;
 	cmd->filter = __cpu_to_le32(filter);
+	cmd->pdev_id = __cpu_to_le32(0);
+	cmd->reserved = __cpu_to_le32(0);
 
 	ptr += sizeof(*tlv);
 	ptr += sizeof(*cmd);
