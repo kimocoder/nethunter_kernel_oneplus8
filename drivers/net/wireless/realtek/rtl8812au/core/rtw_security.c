@@ -1928,7 +1928,7 @@ u32	rtw_aes_decrypt(_adapter *padapter, u8 *precvframe)
 	u32	res = _SUCCESS;
 	pframe = (unsigned char *)((union recv_frame *)precvframe)->u.hdr.rx_data;
 	/* 4 start to encrypt each fragment */
-	if ((prxattrib->encrypt == _AES_)) {
+	if (prxattrib->encrypt == _AES_) {
 
 		stainfo = rtw_get_stainfo(&padapter->stapriv , &prxattrib->ta[0]);
 		if (stainfo != NULL) {
