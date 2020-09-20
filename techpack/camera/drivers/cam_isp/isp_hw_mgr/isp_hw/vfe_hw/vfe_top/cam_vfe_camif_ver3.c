@@ -293,7 +293,7 @@ static int cam_vfe_camif_ver3_resource_init(
 	}
 
 	/* All auto clock gating disabled by default */
-	CAM_INFO(CAM_ISP, "overriding clock gating");
+	//CAM_INFO(CAM_ISP, "overriding clock gating");
 	cam_io_w_mb(0xFFFFFFFF, camif_data->mem_base +
 		camif_data->common_reg->core_cgc_ovd_0);
 

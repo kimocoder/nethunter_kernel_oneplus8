@@ -2901,10 +2901,10 @@ ssize_t notify_dim_store(struct device *dev,
 	if (dim_status == oneplus_dim_status)
 		return count;
 	oneplus_dim_status = dim_status;
-	pr_err("notify dim %d,aod = %d press= %d aod_hide =%d\n",
+	pr_debug("notify dim %d,aod = %d press= %d aod_hide =%d\n",
 		oneplus_dim_status, dsi_display->panel->aod_status, oneplus_onscreenfp_status, aod_layer_hide);
 	if (oneplus_dim_status == 1 && HBM_flag) {
-		pr_err("notify dim not commit");
+		pr_debug("notify dim not commit");
 		return count;
 	}
 	drm_modeset_lock_all(drm_dev);
