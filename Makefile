@@ -725,16 +725,16 @@ stackp-flags-$(CONFIG_STACKPROTECTOR_STRONG)      := -fstack-protector-strong
 KBUILD_CFLAGS += $(stackp-flags-y)
 
 ifeq ($(cc-name),clang)
-KBUILD_CFLAGS += -mllvm -polly \
-			-mllvm -polly-parallel -lgomp \
-			-mllvm -polly-omp-backend=LLVM \
-			-mllvm -polly-run-dce \
-			-mllvm -polly-run-inliner \
-			-mllvm -polly-opt-fusion=max \
-			-mllvm -polly-ast-use-context \
-			-mllvm -polly-detect-keep-going \
-			-mllvm -polly-vectorizer=stripmine \
-			-mllvm -polly-invariant-load-hoisting
+#KBUILD_CFLAGS += -mllvm -polly \
+#			-mllvm -polly-parallel -lgomp \
+#			-mllvm -polly-omp-backend=LLVM \
+#			-mllvm -polly-run-dce \
+#			-mllvm -polly-run-inliner \
+#			-mllvm -polly-opt-fusion=max \
+#			-mllvm -polly-ast-use-context \
+#			-mllvm -polly-detect-keep-going \
+#			-mllvm -polly-vectorizer=stripmine \
+#			-mllvm -polly-invariant-load-hoisting
 
 ifneq ($(CROSS_COMPILE),)
 CLANG_TRIPLE	?= $(CROSS_COMPILE)
