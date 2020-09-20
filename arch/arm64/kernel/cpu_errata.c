@@ -659,7 +659,7 @@ static const struct midr_range arm64_workaround_858921_cpus[] = {
 	/* Cortex-A73 all versions */
 	MIDR_ALL_VERSIONS(MIDR_CORTEX_A73),
 	/* KRYO2XX Gold all versions */
-	MIDR_ALL_VERSIONS(MIDR_KRYO2XX_GOLD),
+	//MIDR_ALL_VERSIONS(MIDR_KRYO2XX_GOLD),
 	{},
 };
 
@@ -683,7 +683,7 @@ static const struct midr_range arm64_workaround_845719_cpus[] = {
 	/* Cortex-A53 r0p[01234] */
 	MIDR_RANGE(MIDR_CORTEX_A53, 0, 0, 0, 4),
 	/* Kryo2xx Silver rAp4 */
-	MIDR_RANGE(MIDR_KRYO2XX_SILVER, 0xA, 0x4, 0xA, 0x4),
+	//MIDR_RANGE(MIDR_KRYO2XX_SILVER, 0xA, 0x4, 0xA, 0x4),
 	{},
 };
 
