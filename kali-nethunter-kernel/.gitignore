@@ -1,14 +1,14 @@
 # Untracked working directories
-modules_out
-nethunter
+#modules_out
+#nethunter
 out
-output
+#output
 toolchain_archs
-local.config
-anykernel3/modules
+#local.config
+#anykernel3/modules
 
 
 # Untracked files:
-anykernel3/Image*
-anykernel3/*dtb*
-anykernel3/Changelog.txt
+#anykernel3/Image*
+#anykernel3/*dtb*
+#anykernel3/Changelog.txt

@@ -20,7 +20,7 @@
 *.dwo
 *.elf
 *.gcno
-*.gz
+#*.gz
 *.i
 *.ko
 *.lex.c
@@ -33,7 +33,7 @@
 *.o
 *.o.*
 *.order
-*.patch
+#*.patch
 *.s
 *.so
 *.so.dbg
@@ -42,8 +42,8 @@
 *.tab.[ch]
 *.tar
 *.xz
-Module.symvers
-modules.builtin
+#Module.symvers
+#modules.builtin
 
 #
 # Top-level generic files
@@ -51,12 +51,12 @@ modules.builtin
 /tags
 /TAGS
 /linux
-/vmlinux
+#/vmlinux
 /vmlinux.32
 /vmlinux-gdb.py
-/vmlinuz
-/System.map
-/Module.markers
+#/vmlinuz
+#/System.map
+#/Module.markers
 
 #
 # RPM spec file (make rpm-pkg)
@@ -113,7 +113,6 @@ GTAGS
 
 # id-utils files
 ID
-
 *.orig
 *~
 \#*#
