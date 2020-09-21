@@ -1,4 +1,17 @@
 #!/bin/bash
+#
+#
+#
+# QCACLD-3 CAF TAG FETCHER
+# a small script for Android kernels: by kimocoder
+#
+#
+#
+# FIND LATEST CAF/TAGS AT
+# Remember to check for newer TAGS now and then: https://wiki.codeaurora.org/xwiki/bin/QAEP/release
+#
+#
+
 
 
 # OPTIONS / SETTINGS
@@ -8,17 +21,15 @@ CAF_TAG=LA.UM.8.12.r1-14100-sm8250.0
 
 
 
-
 # Adding QCACLD-3 core as a remote repository.
 # Use commands below these ones to fetch updates.
 git remote add qcacld https://source.codeaurora.org/quic/la/platform/vendor/qcom-opensource/wlan/qcacld-3.0
-git fetch $CAF_TAG
+git fetch qcacld $CAF_TAG
 git merge -s ours --no-commit FETCH_HEAD --allow-unrelated-histories
 git read-tree --prefix=drivers/staging/qcacld-3.0 -u FETCH_HEAD
 git commit
 
-# Use this one to fetch updates to existing CAF.
-# Remember to check for newer TAGS now and then: https://wiki.codeaurora.org/xwiki/bin/QAEP/release
+# Use this one to fetch updates to existing CAF/TAGS.
 #git fetch qcacld $CAF_TAG
 #git merge -X subtree=drivers/staging/qcacld-3.0 FETCH_HEAD
 
