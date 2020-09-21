@@ -1,0 +1,158 @@
+#!/usr/bin/env python3
+#
+# Copyright (c) 2015, The Linux Foundation.
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are
+# met:
+#
+# 1. Redistributions of source code must retain the above copyright
+# notice, this list of conditions and the following disclaimer.
+#
+# 2. Redistributions in binary form must reproduce the above copyright
+# notice, this list of conditions and the following disclaimer in the
+# documentation and/or other materials provided with the distribution.
+#
+# 3. Neither the name of the copyright holder nor the names of its
+# contributors may be used to endorse or promote products derived from
+# this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+# "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+# LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+# A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+# HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+# SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+# LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+# DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+# THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+# (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+# OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#
+
+import os
+import os.path
+import sys
+import subprocess
+import stubs
+import stubslib
+
+def git_am(stub_git, buf):
+      cmd = [stub_git, 'am', '-s']
+
+      p = subprocess.Popen(cmd, stdout=subprocess.PIPE,
+                           stdin=subprocess.PIPE, stderr=subprocess.PIPE,
+                           universal_newlines=True)
+
+      (stdoutdata, stderrdata) = p.communicate(input=buf)
+      if len(stdoutdata) > 0:
+            print(stdoutdata)
+      if len(stderrdata) > 0:
+            print(repr(stderrdata))
+
+def main():
+      srcdir = os.environ['SRCDIR']
+      datadir = os.environ['DATADIR']
+      stubsdir = os.path.join(srcdir, 'stubs')
+      stubsdatadir = os.path.join(stubsdir, 'data')
+      patchesdir = os.path.join(stubsdatadir, 'patches')
+      stub_git = 'git'
+
+      os.chdir(datadir)
+
+      # hack to enable automatic flushing so that printouts are not
+      # out of order
+      # https://stackoverflow.com/questions/27067713/why-text-i-o-must-be-buffered-in-python-3
+      sys.stdout = os.fdopen(sys.stdout.fileno(), 'w', buffering=1)
+
+      gitstub = stubs.GitStub()
+      gitdir = gitstub.gitdir
+      gitstub.start()
+      
+      print('check branch')
+      sys.stdout.flush()
+      subprocess.call([stub_git, 'branch'])
+      print()
+
+      print('check configs')
+      subprocess.call([stub_git, 'config', '--get', 'user.email'])
+      subprocess.call([stub_git, 'config', '--get', 'user.name'])
+      subprocess.call([stub_git, 'config', '--get', 'sendemail.smtpserver'])
+      subprocess.call([stub_git, 'config', '--get', 'sendemail.smtpserverport'])
+      print()
+
+      print('check return value from a config field which does not exist')
+      returncode = subprocess.call([stub_git, 'config', '--get', 'no.existance'])
+      if returncode == 0:
+            print('Wrong return value from no.existance: %d' % (returncode))
+      print()
+
+      print('add patches')
+      f = open(os.path.join(patchesdir, '1001-review-foo-test-1.patch'), 'r')
+      buf = f.read()
+      f.close()
+
+      git_am(stub_git, buf)
+
+      # verify patch
+      gitrepo = stubslib.GitRepository.load(gitdir)
+      if buf != gitrepo.get_commits()[0].mbox:
+            print('test-1.patch not correct')
+            sys.exit(2)
+
+      f = open(os.path.join(patchesdir, '1002-review-foo-test-2.patch'), 'r')
+      buf = f.read()
+      f.close()
+
+      git_am(stub_git, buf)
+
+      # verify patch
+      gitrepo = stubslib.GitRepository.load(gitdir)
+      if buf != gitrepo.get_commits()[-1].mbox:
+            print('test-2.patch not correct')
+            sys.exit(2)
+
+      print('test git log')
+      f = open(os.path.join(patchesdir, '1030-new-foo-new-patch.patch'), 'r')
+      buf = f.read()
+      f.close()
+      git_am(stub_git, buf)
+      subprocess.call([stub_git, 'log', '--oneline', '--max-count=2'])
+      print()
+
+      print('test git show HEAD')
+      subprocess.call([stub_git, 'show', 'HEAD'])
+      print()
+
+      print('test git show --format')
+      subprocess.call([stub_git, 'show', '--format=commit %H%n%s%n%n%b',
+                       '--no-patch', 'HEAD'])
+      print()
+
+      print('test git cherry-pick')
+      subprocess.call([stub_git, 'cherry-pick',
+                       'fb409caeb2ecda7176f3d6af845e87b1c60f6665'])
+      subprocess.call([stub_git, 'log', '--oneline', '--max-count=2'])
+      print()
+
+      print('test git filter-branch')
+      subprocess.call([stub_git, 'filter-branch', '--force', '--msg-filter',
+                       'sed -e "/foo/d"', 'HEAD^..HEAD'])
+      print()
+
+      print('test git am conflict')
+      gitstub.set_commit_failure(1)
+      git_am(stub_git, buf)
+      print()
+
+      print('test git reset')
+      subprocess.call([stub_git, 'reset', '--hard', 'HEAD^'])
+      subprocess.call([stub_git, 'show', 'HEAD'])
+      print()
+
+      # cleanup
+      gitstub.cleanup()
+
+if __name__ == "__main__":
+      main()

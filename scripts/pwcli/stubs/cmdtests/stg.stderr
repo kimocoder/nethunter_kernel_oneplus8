@@ -1,0 +1,11 @@
+error: patch failed: drivers/net/wireless/foo/core.c:1714
+error: drivers/net/wireless/foo/core.c: patch does not apply
+error: patch failed: drivers/net/wireless/foo/core.h:635
+error: drivers/net/wireless/foo/core.h: patch does not apply
+error: patch failed: drivers/net/wireless/foo/debug.c:1427
+error: drivers/net/wireless/foo/debug.c: patch does not apply
+error: patch failed: drivers/net/wireless/foo/debug.h:59
+error: drivers/net/wireless/foo/debug.h: patch does not apply
+error: patch failed: drivers/net/wireless/foo/mac.c:6924
+error: drivers/net/wireless/foo/mac.c: patch does not apply
+stg import: Diff does not apply cleanly

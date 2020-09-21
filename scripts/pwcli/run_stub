@@ -1,0 +1,119 @@
+#!/usr/bin/env python3
+#
+# Copyright (c) 2015, The Linux Foundation.
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are
+# met:
+#
+# 1. Redistributions of source code must retain the above copyright
+# notice, this list of conditions and the following disclaimer.
+#
+# 2. Redistributions in binary form must reproduce the above copyright
+# notice, this list of conditions and the following disclaimer in the
+# documentation and/or other materials provided with the distribution.
+#
+# 3. Neither the name of the copyright holder nor the names of its
+# contributors may be used to endorse or promote products derived from
+# this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+# "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+# LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+# A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+# HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+# SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+# LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+# DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+# THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+# (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+# OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#
+
+import os
+import os.path
+import sys
+import tempfile
+import shutil
+import argparse
+import logging
+
+# logging
+logging.basicConfig()
+logger = logging.getLogger('run_stub')
+
+# uncomment to get debug logs
+#logger.setLevel(logging.DEBUG)
+
+# these below must be initialised before importing stubs module
+srcdir = os.getcwd()
+os.environ['SRCDIR'] = srcdir
+
+datadir = tempfile.mkdtemp(prefix='pwcli-stub-')
+os.environ['DATADIR'] = datadir
+
+stubsdir = os.path.join(srcdir, 'stubs')
+sys.path.insert(0, stubsdir)
+
+import stubs
+
+logger.debug('srcdir=%r' % (srcdir))
+logger.debug('datadir=%r' % (datadir))
+logger.debug('stubsdir=%r' % (stubsdir))
+
+# separate port numbers for run_stub so that it can be run
+# concurrently with tests
+PATCHWORK_PORT=8106
+SMTP_PORT=5871
+
+def main():
+      parser = argparse.ArgumentParser(description='run_stub')
+
+      parser.add_argument('--keep', action='store_true',
+                          help='Keep the temporary datadir for debugging')
+      parser.add_argument('--stgit', action='store_true',
+                          help='Enable stgit mode')
+
+      args = parser.parse_args()
+
+      print('Using datadir: %s' % (datadir))
+
+      git = stubs.GitStub(smtpport=SMTP_PORT)
+      git.start()
+
+      if args.stgit:
+            stg = stubs.StgStub()
+            stg.start()
+
+      patchwork = stubs.PatchworkStub(port=PATCHWORK_PORT)
+      patchwork.start()
+
+      smtpd = stubs.SmtpdStub(port=5871)
+      smtpd.start()
+
+      os.chdir(datadir)
+
+      pwcli = stubs.PwcliWrapper(stgit=args.stgit,
+                                 patchworkport=PATCHWORK_PORT,
+                                 smtpport=SMTP_PORT,
+                                 censor=False)
+      pwcli.write_config()
+      pwcli.start()
+      pwcli.wait()
+
+      patchwork.stop()
+      smtpd.stop()
+
+      if args.stgit:
+            stg.stop()
+
+      git.stop()
+
+      if not args.keep:
+            shutil.rmtree(datadir)
+      else:
+            print('Keeping temporary datadir: %s' % (datadir))
+
+if __name__ == "__main__":
+      main()

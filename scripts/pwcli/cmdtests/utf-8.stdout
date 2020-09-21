@@ -1,0 +1,97 @@
+Connecting to http://localhost:8105/
+Downloading patches from the server
+User          : test
+Project       : stub-test
+Tree          : data
+Branch        : master
+New           : 19
+Review        : 7
+Upstream      : 0
+Deferred      : 6
+Total         : 32
+master@data > list -f Examplè
+list -f Examplè
+ [  1] foo: utf-8 tèst               - - - -   3d Èd Examplè   Deferred         
+master@data > download 1
+download 1
+1 patches written to 1021.mbox
+master@data > commit 1
+commit 1
+Retrieving patches (1/1)
+       foo: utf-8 tèst               - - - -   3d Èd Examplè   Deferred         
+------------------------------------------------------------
+1 patches
+commit All/aBort? a
+a
+Committing patches (1/1)
+                                                                   CC foo.c                                                                   CC bar.c                                                                   CC aaa.c                                                                   CC bbb.c                                                                 Build successful
+============================================================
+1 patches applied:
+
+89afb3a96d7c foo: utf-8 tèst
+
+Accepted/Under review/Changes requested/Rejected/New/Deferred/Superseded/aWaitingg upstream/not aPplicable/rFc/aBort? a
+a
+Setting patch state (1/1)
+Patch set to Accepted
+master@data > quit
+1 messages found from 1021.mbox:
+Èd Examplè <ed@example.com>: foo: utf-8 tèst
+----------------------------------------------------------------------
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Subject: =?utf-8?q?foo=3A_utf-8_t=C3=A8st?=
+From: =?utf-8?b?w4hkIEV4YW1wbMOoIDxlZEBleGFtcGxlLmNvbT4=?=
+Message-Id: <22222@example.com>
+To: list@example.com
+Date: 2011-02-11 18:17:17
+X-Patchwork-Id: 1021
+X-Submitter-Id: 7477
+X-Project: Linux Wireless Mailing List
+X-Project-Id: 15
+X-Commit-Ref: 
+X-State: Deferred
+X-State-Id: 10
+X-Delegate: test
+X-Delegate-Id: 25621
+
+
+Foo commit log. Ignore this text
+
+Signed-off-by: Èd Examplè <ed@example.com>
+
+---
+FIXME: add the patch here
+
+----------------------------------------------------------------------
+mail 0:
+----------------------------------------------------------------------
+test@example.com -> "Èd Examplè <ed@example.com>", list@example.com
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Subject: Re: =?utf-8?q?foo=3A_utf-8_t=C3=A8st?=
+From: Timo Testi <test@example.com>
+In-Reply-To: <22222@example.com>
+References: <22222@example.com>
+To: =?utf-8?b?w4hkIEV4YW1wbMOoIDxlZEBleGFtcGxlLmNvbT4=?=
+Cc: list@example.com
+User-Agent: pwcli/<censored> (https://github.com/kvalo/pwcli/)
+ Python/<censored>
+
+Èd Examplè <ed@example.com> wrote:
+
+> Foo commit log. Ignore this text
+> 
+> Signed-off-by: Èd Examplè <ed@example.com>
+
+Patch applied to data.git, thanks.
+
+89afb3a96d7c foo: utf-8 tèst
+
+-- 
+Sent by pwcli
+http://localhost/fixme/12345
+----------------------------------------------------------------------
+

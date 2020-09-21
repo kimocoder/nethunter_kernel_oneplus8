@@ -1,0 +1,215 @@
+Connecting to http://localhost:8105/
+Downloading patches from the server
+User          : test
+Project       : stub-test
+Tree          : data
+Branch        : master
+New           : 19
+Review        : 7
+Upstream      : 0
+Deferred      : 6
+Total         : 32
+master@data > list new
+list new
+ [  1] foo: new patch                - - - -   3d Timo Tiger   New              
+ [  2] foo: minor change with CC     - - - -   2d Timo Tiger   New              
+ [  3] foo: another minor change.... - - - -   2d Timo Tiger   New              
+ [  4] [1/15] bar: blah blah blah 1  - - - -   2d Dino Dinosau New              
+ [  5] [2/15] bar: blah blah blah 2  - - - -   2d Dino Dinosau New              
+ [  6] [3/15] bar: blah blah blah 3  - - - -   2d Dino Dinosau New              
+ [  7] [4/15] bar: blah blah blah 4  - - - -   2d Dino Dinosau New              
+ [  8] [5/15] bar: blah blah blah 5  - - - -   2d Dino Dinosau New              
+ [  9] [6/15] bar: blah blah blah 6  - - - -   2d Dino Dinosau New              
+ [ 10] [7/15] bar: blah blah blah 7  - - - -   2d Dino Dinosau New              
+ [ 11] [8/15] bar: blah blah blah 8  - - - -   2d Dino Dinosau New              
+ [ 12] [9/15] bar: blah blah blah 9  - - - -   2d Dino Dinosau New              
+ [ 13] [10/15] bar: blah blah bla... - - - -   2d Dino Dinosau New              
+ [ 14] [11/15] bar: blah blah bla... - - - -   2d Dino Dinosau New              
+ [ 15] [12/15] bar: blah blah bla... - - - -   2d Dino Dinosau New              
+ [ 16] [13/15] bar: blah blah bla... - - - -   2d Dino Dinosau New              
+ [ 17] [14/15] bar: blah blah bla... - - - -   2d Dino Dinosau New              
+ [ 18] [15/15] bar: blah blah bla... - - - -   2d Dino Dinosau New              
+ [ 19] foo: patch with a really l... - - - -  11h Lasse Really New              
+master@data > commit 1
+commit 1
+Retrieving patches (1/1)
+       foo: new patch                - - - -   3d Timo Tiger   New              
+------------------------------------------------------------
+1 patches
+commit All/aBort? a
+a
+Committing patches (1/1)
+                                                                   CC foo.c                                                                   CC bar.c                                                                   CC aaa.c                                                                   CC bbb.c                                                                 Build successful
+============================================================
+1 patches applied:
+
+750f7254ae57 foo: new patch
+
+Accepted/Under review/Changes requested/Rejected/New/Deferred/Superseded/aWaitingg upstream/not aPplicable/rFc/aBort? a
+a
+Setting patch state (1/1)
+Patch set to Accepted
+master@data > list review
+list review
+ [  1] [1/7] foo: test 1             - - - -   3d Dino Dinosau Under Review     
+ [  2] [2/7] foo: test 2             - - - -   3d Timo Tiger   Under Review     
+ [  3] [3/7] foo: test 3             - - - -   3d Timo Tiger   Under Review     
+ [  4] [4/7] foo: test 4             - - - -   3d Timo Tiger   Under Review     
+ [  5] [5/7] foo: test 5             - - - -   3d Timo Tiger   Under Review     
+ [  6] [6/7] foo: test 6             - - - -   3d Timo Tiger   Under Review     
+ [  7] [7/7] foo: test 7             - - - -   3d Timo Tiger   Under Review     
+master@data > commit 1-7
+commit 1-7
+Retrieving patches (1/7)Retrieving patches (2/7)Retrieving patches (3/7)Retrieving patches (4/7)Retrieving patches (5/7)Retrieving patches (6/7)Retrieving patches (7/7)
+       [1/7] foo: test 1             - - - -   3d Dino Dinosau Under Review     
+       [2/7] foo: test 2             - - - -   3d Timo Tiger   Under Review     
+       [3/7] foo: test 3             - - - -   3d Timo Tiger   Under Review     
+       [4/7] foo: test 4             - - - -   3d Timo Tiger   Under Review     
+       [5/7] foo: test 5             - - - -   3d Timo Tiger   Under Review     
+       [6/7] foo: test 6             - - - -   3d Timo Tiger   Under Review     
+       [7/7] foo: test 7             - - - -   3d Timo Tiger   Under Review     
+------------------------------------------------------------
+7 patches
+commit All/aBort? a
+a
+Committing patches (1/7)Committing patches (2/7)Committing patches (3/7)Committing patches (4/7)Committing patches (5/7)
+Failed to apply the patch: ['git', 'am', '-s', '-3'] failed: 1
+Applying: foo: conflict patch
+Using index info to reconstruct a base tree...
+Falling back to patching base and 3-way merge...
+Auto-merging foo/bar.c
+CONFLICT (content): Merge conflict in drivers/net/wireless/ath/foo/core.h
+Failed to merge in the changes.
+Patch failed at 0001 foo: conflict patch
+
+Under review/Changes requested/Rejected/New/Deferred/Superseded/aWaiting upstreamm/not aPplicable/rFc/aBort? c
+c
+Setting patch state (1/7)Setting patch state (2/7)Setting patch state (3/7)Setting patch state (4/7)Setting patch state (5/7)Setting patch state (6/7)Setting patch state (7/7)
+7 patches set to Changes Requested
+Reason (RET for no mail): Patch 5 failed to apply.
+Patch 5 failed to apply.
+============================================================
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Subject: Re: [1/7] foo: test 1
+From: Timo Testi <test@example.com>
+In-Reply-To: <11111@example.com>
+References: <11111@example.com>
+To: Dino Dinosaurus <dino@example.com>
+Cc: list@example.com
+User-Agent: pwcli/<censored> (https://github.com/kvalo/pwcli/) Python/<censored>
+
+Dino Dinosaurus <dino@example.com> wrote:
+
+> Foo commit log. Ignore this text
+> 
+> Signed-off-by: Dino Dinosaurus <dino@example.com>
+
+Patch 5 failed to apply.
+
+Applying: foo: conflict patch
+Using index info to reconstruct a base tree...
+Falling back to patching base and 3-way merge...
+Auto-merging foo/bar.c
+CONFLICT (content): Merge conflict in drivers/net/wireless/ath/foo/core.h
+Failed to merge in the changes.
+Patch failed at 0001 foo: conflict patch
+
+7 patches set to Changes Requested.
+
+1001 [1/7] foo: test 1
+1002 [2/7] foo: test 2
+1003 [3/7] foo: test 3
+1004 [4/7] foo: test 4
+1005 [5/7] foo: test 5
+1006 [6/7] foo: test 6
+1007 [7/7] foo: test 7
+
+-- 
+Sent by pwcli
+http://localhost/fixme/12345
+
+
+============================================================
+Envelope From: Timo Testi <test@example.com>
+Envelope To: ['Dino Dinosaurus <dino@example.com>', 'list@example.com']
+Send/Edit/aBort? s
+s
+master@data > quit
+mail 0:
+----------------------------------------------------------------------
+test@example.com -> timo@example.com, list@example.com
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Subject: Re: foo: new patch
+From: Timo Testi <test@example.com>
+In-Reply-To: <22222@example.com>
+References: <22222@example.com>
+To: Timo Tiger <timo@example.com>
+Cc: list@example.com
+User-Agent: pwcli/<censored> (https://github.com/kvalo/pwcli/)
+ Python/<censored>
+
+Timo Tiger <timo@example.com> wrote:
+
+> Foo commit log. Ignore this text
+> 
+> Signed-off-by: Dino Dinosaurus <dino@example.com>
+
+Patch applied to data.git, thanks.
+
+750f7254ae57 foo: new patch
+
+-- 
+Sent by pwcli
+http://localhost/fixme/12345
+----------------------------------------------------------------------
+mail 1:
+----------------------------------------------------------------------
+test@example.com -> dino@example.com, list@example.com
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Subject: Re: [1/7] foo: test 1
+From: Timo Testi <test@example.com>
+In-Reply-To: <11111@example.com>
+References: <11111@example.com>
+To: Dino Dinosaurus <dino@example.com>
+Cc: list@example.com
+User-Agent: pwcli/<censored> (https://github.com/kvalo/pwcli/)
+ Python/<censored>
+
+Dino Dinosaurus <dino@example.com> wrote:
+
+> Foo commit log. Ignore this text
+> 
+> Signed-off-by: Dino Dinosaurus <dino@example.com>
+
+Patch 5 failed to apply.
+
+Applying: foo: conflict patch
+Using index info to reconstruct a base tree...
+Falling back to patching base and 3-way merge...
+Auto-merging foo/bar.c
+CONFLICT (content): Merge conflict in drivers/net/wireless/ath/foo/core.h
+Failed to merge in the changes.
+Patch failed at 0001 foo: conflict patch
+
+7 patches set to Changes Requested.
+
+1001 [1/7] foo: test 1
+1002 [2/7] foo: test 2
+1003 [3/7] foo: test 3
+1004 [4/7] foo: test 4
+1005 [5/7] foo: test 5
+1006 [6/7] foo: test 6
+1007 [7/7] foo: test 7
+
+-- 
+Sent by pwcli
+http://localhost/fixme/12345
+----------------------------------------------------------------------
+
+750f7254ae57 foo: new patch

@@ -1,4 +1,7 @@
-====================     2020-09-21    ====================94cf7c8  Update README.md  [Christian Bremvåg]
+====================     2020-09-21    ====================a0c10fb  mac80211: Inform AP when returning operating channel  [Loic Poulain]
+f5dc45b  ath10k: correct wmi_tlv command params to enable pktlog for WCN3990  [Abhishek Ambure]
+0f0fe5f  Awesome tweaks + Added latest QCACLD-3 (CAF)  [kimocoder]
+94cf7c8  Update README.md  [Christian Bremvåg]
 4d14431  Add QCACLD3 updater script  [kimocoder]
 75ffbb0  Integrate the brand new QCACLD-3 CAF import (to staging) / autoload  [kimocoder]
 a5af9b6  Disable CRC check  [kimocoder]

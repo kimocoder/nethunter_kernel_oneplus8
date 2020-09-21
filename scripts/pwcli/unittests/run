@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# stubs
+export PATH=../stubs:$PATH
+
+# hack to make it possible import classes from pwcli.py
+if [ ! -h pwcli.py ]; then
+    ln -s ../pwcli pwcli.py
+fi
+
+python3 -m unittest discover

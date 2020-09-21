@@ -1,0 +1,104 @@
+Connecting to http://localhost:8105/
+Downloading patches from the server
+User          : test
+Project       : stub-test
+Tree          : data
+Branch        : master
+New           : 19
+Review        : 7
+Upstream      : 0
+Deferred      : 6
+Total         : 32
+master@data > list review
+list review
+ [  1] [1/7] foo: test 1             - - - -   3d Dino Dinosau Under Review     
+ [  2] [2/7] foo: test 2             - - - -   3d Timo Tiger   Under Review     
+ [  3] [3/7] foo: test 3             - - - -   3d Timo Tiger   Under Review     
+ [  4] [4/7] foo: test 4             - - - -   3d Timo Tiger   Under Review     
+ [  5] [5/7] foo: test 5             - - - -   3d Timo Tiger   Under Review     
+ [  6] [6/7] foo: test 6             - - - -   3d Timo Tiger   Under Review     
+ [  7] [7/7] foo: test 7             - - - -   3d Timo Tiger   Under Review     
+master@data > list review
+list review
+ [  1] [1/7] foo: test 1             - - - -   3d Dino Dinosau Under Review     
+ [  2] [2/7] foo: test 2             - - - -   3d Timo Tiger   Under Review     
+ [  3] [3/7] foo: test 3             - - - -   3d Timo Tiger   Under Review     
+ [  4] [4/7] foo: test 4             - - - -   3d Timo Tiger   Under Review     
+ [  5] [5/7] foo: test 5             - - - -   3d Timo Tiger   Under Review     
+ [  6] [6/7] foo: test 6             - - - -   3d Timo Tiger   Under Review     
+ [  7] [7/7] foo: test 7             - - - -   3d Timo Tiger   Under Review     
+master@data > list new
+list new
+ [  1] foo: new patch                - - - -   3d Timo Tiger   New              
+ [  2] foo: minor change with CC     - - - -   2d Timo Tiger   New              
+ [  3] foo: another minor change.... - - - -   2d Timo Tiger   New              
+ [  4] [1/15] bar: blah blah blah 1  - - - -   2d Dino Dinosau New              
+ [  5] [2/15] bar: blah blah blah 2  - - - -   2d Dino Dinosau New              
+ [  6] [3/15] bar: blah blah blah 3  - - - -   2d Dino Dinosau New              
+ [  7] [4/15] bar: blah blah blah 4  - - - -   2d Dino Dinosau New              
+ [  8] [5/15] bar: blah blah blah 5  - - - -   2d Dino Dinosau New              
+ [  9] [6/15] bar: blah blah blah 6  - - - -   2d Dino Dinosau New              
+ [ 10] [7/15] bar: blah blah blah 7  - - - -   2d Dino Dinosau New              
+ [ 11] [8/15] bar: blah blah blah 8  - - - -   2d Dino Dinosau New              
+ [ 12] [9/15] bar: blah blah blah 9  - - - -   2d Dino Dinosau New              
+ [ 13] [10/15] bar: blah blah bla... - - - -   2d Dino Dinosau New              
+ [ 14] [11/15] bar: blah blah bla... - - - -   2d Dino Dinosau New              
+ [ 15] [12/15] bar: blah blah bla... - - - -   2d Dino Dinosau New              
+ [ 16] [13/15] bar: blah blah bla... - - - -   2d Dino Dinosau New              
+ [ 17] [14/15] bar: blah blah bla... - - - -   2d Dino Dinosau New              
+ [ 18] [15/15] bar: blah blah bla... - - - -   2d Dino Dinosau New              
+ [ 19] foo: patch with a really l... - - - -  11h Lasse Really New              
+master@data > list deferred
+list deferred
+ [  1] foo: small cleanup            - - - -   3d Timo Tiger   Deferred         
+ [  2] foo: utf-8 tèst               - - - -   3d Èd Examplè   Deferred         
+ [  3] [1/4] koo: yyy bbb cc 1       - - - -   2d Dino Dinosau Deferred         
+ [  4] [2/4] koo: yyy bbb cc 2       - - - -   2d Dino Dinosau Deferred         
+ [  5] [3/4] koo: yyy bbb cc 3       - - - -   2d Dino Dinosau Deferred         
+ [  6] [4/4] koo: yyy bbb cc 4       - - - -   2d Dino Dinosau Deferred         
+master@data > list --state deferred
+list --state deferred
+ [  1] foo: small cleanup            - - - -   3d Timo Tiger   Deferred         
+ [  2] foo: utf-8 tèst               - - - -   3d Èd Examplè   Deferred         
+ [  3] [1/4] koo: yyy bbb cc 1       - - - -   2d Dino Dinosau Deferred         
+ [  4] [2/4] koo: yyy bbb cc 2       - - - -   2d Dino Dinosau Deferred         
+ [  5] [3/4] koo: yyy bbb cc 3       - - - -   2d Dino Dinosau Deferred         
+ [  6] [4/4] koo: yyy bbb cc 4       - - - -   2d Dino Dinosau Deferred         
+master@data > list --title foo:.*2
+list --title foo:.*2
+ [  1] [2/7] foo: test 2             - - - -   3d Timo Tiger   Under Review     
+master@data > list --from timo new
+list --from timo new
+ [  1] foo: new patch                - - - -   3d Timo Tiger   New              
+ [  2] foo: minor change with CC     - - - -   2d Timo Tiger   New              
+ [  3] foo: another minor change.... - - - -   2d Timo Tiger   New              
+master@data > list blah
+list blah
+ [  1] [1/15] bar: blah blah blah 1  - - - -   2d Dino Dinosau New              
+ [  2] [2/15] bar: blah blah blah 2  - - - -   2d Dino Dinosau New              
+ [  3] [3/15] bar: blah blah blah 3  - - - -   2d Dino Dinosau New              
+ [  4] [4/15] bar: blah blah blah 4  - - - -   2d Dino Dinosau New              
+ [  5] [5/15] bar: blah blah blah 5  - - - -   2d Dino Dinosau New              
+ [  6] [6/15] bar: blah blah blah 6  - - - -   2d Dino Dinosau New              
+ [  7] [7/15] bar: blah blah blah 7  - - - -   2d Dino Dinosau New              
+ [  8] [8/15] bar: blah blah blah 8  - - - -   2d Dino Dinosau New              
+ [  9] [9/15] bar: blah blah blah 9  - - - -   2d Dino Dinosau New              
+ [ 10] [10/15] bar: blah blah bla... - - - -   2d Dino Dinosau New              
+ [ 11] [11/15] bar: blah blah bla... - - - -   2d Dino Dinosau New              
+ [ 12] [12/15] bar: blah blah bla... - - - -   2d Dino Dinosau New              
+ [ 13] [13/15] bar: blah blah bla... - - - -   2d Dino Dinosau New              
+ [ 14] [14/15] bar: blah blah bla... - - - -   2d Dino Dinosau New              
+ [ 15] [15/15] bar: blah blah bla... - - - -   2d Dino Dinosau New              
+master@data > list -f D.no review
+list -f D.no review
+ [  1] [1/7] foo: test 1             - - - -   3d Dino Dinosau Under Review     
+master@data > list -f D.no -s review
+list -f D.no -s review
+ [  1] [1/7] foo: test 1             - - - -   3d Dino Dinosau Under Review     
+master@data > list --from Timo --state review --title 6
+list --from Timo --state review --title 6
+ [  1] [6/7] foo: test 6             - - - -   3d Timo Tiger   Under Review     
+master@data > list --from Timo --title 6 review
+list --from Timo --title 6 review
+ [  1] [6/7] foo: test 6             - - - -   3d Timo Tiger   Under Review     
+master@data > quit

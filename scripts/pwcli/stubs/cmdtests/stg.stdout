@@ -1,0 +1,55 @@
+import one patch
+Checking for changes in the working directory ... done
+Importing patch "foo-test-1" ... done
+Now at patch "foo-test-1"
+
+check patch was correctly imported
+foo: test 1
+
+import a second patch
+Checking for changes in the working directory ... done
+Importing patch "foo-test-2" ... done
+Now at patch "foo-test-2"
+
+test that commit id is stable and a valid git object
+b50b875961e9 foo: test 1
+bbd3154f2111 foo: test 2
+
+test series
+foo-test-1
+foo-test-2
+
+test show
+commit bbd3154f2111572248f813c70dc030fc3749811f
+Author: Timo Tiger <timo@example.com>
+Date:   2011-02-11 15:23:32
+
+    foo: test 2
+    
+    Foo commit log. Ignore this text
+    
+    Signed-off-by: Dino Dinosaurus <dino@example.com>
+    
+    ---
+    FIXME: add the patch here
+
+diff...
+
+import should fail
+
+test delete
+commit b50b875961e94e1bb9b826425f950d405c45c3d5
+Author: Dino Dinosaurus <dino@example.com>
+Date:   2011-02-11 15:23:31
+
+    foo: test 1
+    
+    Foo commit log. Ignore this text
+    
+    Signed-off-by: Dino Dinosaurus <dino@example.com>
+    
+    ---
+    FIXME: add the patch here
+
+diff...
+

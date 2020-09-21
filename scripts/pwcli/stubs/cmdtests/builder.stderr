@@ -1,0 +1,8 @@
+* print two warnings
+foo.c: warning: is suspicious
+bar.c: warning: is suspicious
+* set warning count one above the limit
+foo.c: warning: is suspicious
+bar.c: warning: is suspicious
+aaa.c: warning: is suspicious
+bbb.c: warning: is suspicious

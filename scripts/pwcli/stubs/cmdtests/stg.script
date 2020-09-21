@@ -1,0 +1,119 @@
+#!/usr/bin/env python3
+#
+# Copyright (c) 2016, The Linux Foundation.
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are
+# met:
+#
+# 1. Redistributions of source code must retain the above copyright
+# notice, this list of conditions and the following disclaimer.
+#
+# 2. Redistributions in binary form must reproduce the above copyright
+# notice, this list of conditions and the following disclaimer in the
+# documentation and/or other materials provided with the distribution.
+#
+# 3. Neither the name of the copyright holder nor the names of its
+# contributors may be used to endorse or promote products derived from
+# this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+# "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+# LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+# A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+# HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+# SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+# LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+# DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+# THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+# (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+# OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#
+
+import os
+import os.path
+import sys
+import subprocess
+import stubs
+import stubslib
+
+srcdir = os.environ['SRCDIR']
+datadir = os.environ['DATADIR']
+stubsdir = os.path.join(srcdir, 'stubs')
+stubsdatadir = os.path.join(stubsdir, 'data')
+patchesdir = os.path.join(stubsdatadir, 'patches')
+stub_git = 'git'
+stub_stg = 'stg'
+
+def stg_import(filename):
+      path = os.path.join(patchesdir, filename)
+
+      f = open(path, 'r')
+      buf = f.read()
+      f.close()
+      
+      cmd = [stub_stg, 'import', '--mbox', '--sign']
+
+      # p = subprocess.Popen(cmd, stdout=subprocess.PIPE,
+      #                      stdin=subprocess.PIPE, stderr=subprocess.PIPE)
+      p = subprocess.Popen(cmd, stdin=subprocess.PIPE, universal_newlines=True)
+
+      (stdoutdata, stderrdata) = p.communicate(input=buf)
+
+      return p.returncode
+
+def main():
+      os.chdir(datadir)
+
+      # hack to enable automatic flushing so that printouts are not
+      # out of order
+      # https://stackoverflow.com/questions/27067713/why-text-i-o-must-be-buffered-in-python-3
+      sys.stdout = os.fdopen(sys.stdout.fileno(), 'w', buffering=1)
+
+      stgstub = stubs.StgStub()
+      gitdir = stgstub.gitdir
+      stgstub.start()
+
+      print('import one patch')
+      stg_import('1001-review-foo-test-1.patch')
+      print()
+
+      print('check patch was correctly imported')
+      gitrepo = stubslib.GitRepository.load(gitdir)
+      print((gitrepo.get_commits()[-1].get_subject()))
+      print()
+
+      print('import a second patch')
+      stg_import('1002-review-foo-test-2.patch')
+      print()
+
+      print('test that commit id is stable and a valid git object')
+      subprocess.call([stub_git, 'log', '--oneline', '--max-count=2'])
+      print()
+
+      print('test series')
+      subprocess.call([stub_stg, 'series', '--noprefix', '--all'])
+      print()
+
+      print('test show')
+      subprocess.call([stub_stg, 'show', 'foo-test-2'])
+
+      print('import should fail')
+      gitrepo = stubslib.GitRepository.load(gitdir)
+      gitrepo.set_stg_import_failure(1)
+      returncode = stg_import('1002-review-foo-test-2.patch')
+      if returncode != 2:
+            print(('wrong return code: %d' % (returncode)))
+            sys.exit(1)
+      print()
+
+      print('test delete')
+      subprocess.call([stub_stg, 'delete', '--top'])
+      subprocess.call([stub_stg, 'show'])
+      
+      # cleanup
+      stgstub.cleanup()
+
+if __name__ == "__main__":
+      main()

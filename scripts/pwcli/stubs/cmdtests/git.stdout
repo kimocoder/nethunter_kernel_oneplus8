@@ -1,0 +1,48 @@
+check branch
+* master
+
+check configs
+test@example.com
+Timo Testi
+localhost
+5870
+
+check return value from a config field which does not exist
+existance not found
+
+add patches
+test git log
+bbd3154f2111 foo: test 2
+750f7254ae57 foo: new patch
+
+test git show HEAD
+commit 750f7254ae57223354ec431fe9978430745ab359
+
+test git show --format
+commit 750f7254ae57223354ec431fe9978430745ab359
+foo: new patch
+
+TODO: add printing of commit log here, the parsin is just missing
+
+test git cherry-pick
+Commit id fb409caeb2ecda7176f3d6af845e87b1c60f6665 not found.
+bbd3154f2111 foo: test 2
+750f7254ae57 foo: new patch
+
+test git filter-branch
+
+test git am conflict
+Applying: foo: conflict patch
+Using index info to reconstruct a base tree...
+Falling back to patching base and 3-way merge...
+Auto-merging foo/bar.c
+CONFLICT (content): Merge conflict in drivers/net/wireless/ath/foo/core.h
+Failed to merge in the changes.
+Patch failed at 0001 foo: conflict patch
+When you have resolved this problem run "git am --resolved".
+If you would prefer to skip this patch, instead run "git am --skip".
+To restore the original branch and stop patching run "git am --abort".
+
+test git reset
+commit bbd3154f2111572248f813c70dc030fc3749811f
+

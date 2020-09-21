@@ -1,0 +1,101 @@
+Connecting to http://localhost:8105/
+Downloading patches from the server
+User          : test
+Project       : stub-test
+Tree          : data
+Main branches : master
+Pending branch: pending
+New           : 19
+Review        : 0
+Upstream      : 0
+Deferred      : 6
+Total         : 25
+master@data > list new
+list new
+ [  1] foo: new patch                - - - -   3d Timo Tiger   New              
+ [  2] foo: minor change with CC     - - - -   2d Timo Tiger   New              
+ [  3] foo: another minor change.... - - - -   2d Timo Tiger   New              
+ [  4] [1/15] bar: blah blah blah 1  - - - -   2d Dino Dinosau New              
+ [  5] [2/15] bar: blah blah blah 2  - - - -   2d Dino Dinosau New              
+ [  6] [3/15] bar: blah blah blah 3  - - - -   2d Dino Dinosau New              
+ [  7] [4/15] bar: blah blah blah 4  - - - -   2d Dino Dinosau New              
+ [  8] [5/15] bar: blah blah blah 5  - - - -   2d Dino Dinosau New              
+ [  9] [6/15] bar: blah blah blah 6  - - - -   2d Dino Dinosau New              
+ [ 10] [7/15] bar: blah blah blah 7  - - - -   2d Dino Dinosau New              
+ [ 11] [8/15] bar: blah blah blah 8  - - - -   2d Dino Dinosau New              
+ [ 12] [9/15] bar: blah blah blah 9  - - - -   2d Dino Dinosau New              
+ [ 13] [10/15] bar: blah blah bla... - - - -   2d Dino Dinosau New              
+ [ 14] [11/15] bar: blah blah bla... - - - -   2d Dino Dinosau New              
+ [ 15] [12/15] bar: blah blah bla... - - - -   2d Dino Dinosau New              
+ [ 16] [13/15] bar: blah blah bla... - - - -   2d Dino Dinosau New              
+ [ 17] [14/15] bar: blah blah bla... - - - -   2d Dino Dinosau New              
+ [ 18] [15/15] bar: blah blah bla... - - - -   2d Dino Dinosau New              
+ [ 19] foo: patch with a really l... - - - -  11h Lasse Really New              
+master@data > review 1
+review 1
+Retrieving patches (1/1)
+       foo: new patch                - - - -   3d Timo Tiger   New              
+------------------------------------------------------------
+Apply 1 patches to the pending branch? [Apply/Skip/aBort] a
+a
+Importing patches (1/1)
+                                                                   CC foo.c                                                                   CC bar.c                                                                   CC aaa.c                                                                   CC bbb.c                                                                 Build successful
+Under review/Changes requested/Rejected/New/Deferred/Superseded/aWaiting upstreamm/not aPplicable/rFc/aBort? u
+u
+Setting patch state (1/1)
+Patch set to Under Review
+master@data > list pending
+list pending
+*[  1] foo: new patch                - - - -   3d Timo Tiger   Under Review     
+master@data > commit 1
+commit 1
+Retrieving patches (1/1)
+       foo: new patch                - - - -   3d Timo Tiger   Under Review     
+------------------------------------------------------------
+1 patches
+commit All/aBort? a
+a
+Committing patches (1/1)
+                                                                   CC foo.c                                                                   CC bar.c                                                                   CC aaa.c                                                                   CC bbb.c                                                                 Build successful
+============================================================
+1 patches applied:
+
+2a2792504786 foo: new patch
+
+Accepted/Under review/Changes requested/Rejected/New/Deferred/Superseded/aWaitingg upstream/not aPplicable/rFc/aBort? a
+a
+Setting patch state (1/1)
+Patch set to Accepted
+master@data > quit
+mail 0:
+----------------------------------------------------------------------
+test@example.com -> timo@example.com, list@example.com
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Subject: Re: foo: new patch
+From: Timo Testi <test@example.com>
+In-Reply-To: <22222@example.com>
+References: <22222@example.com>
+To: Timo Tiger <timo@example.com>
+Cc: list@example.com
+User-Agent: pwcli/<censored> (https://github.com/kvalo/pwcli/)
+ Python/<censored>
+
+Timo Tiger <timo@example.com> wrote:
+
+> Foo commit log. Ignore this text
+> 
+> Signed-off-by: Dino Dinosaurus <dino@example.com>
+> ---
+> FIXME: add the patch here
+
+Patch applied to data.git, thanks.
+
+2a2792504786 foo: new patch
+
+-- 
+Sent by pwcli
+http://localhost/fixme/12345
+----------------------------------------------------------------------
+

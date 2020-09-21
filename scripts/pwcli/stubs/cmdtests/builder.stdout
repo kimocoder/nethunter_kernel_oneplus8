@@ -1,0 +1,15 @@
+  CC foo.c
+  CC bar.c
+  CC aaa.c
+  CC bbb.c
+* print two warnings
+  CC foo.c
+  CC bar.c
+  CC aaa.c
+  CC bbb.c
+* set warning count one above the limit
+  CC foo.c
+  CC bar.c
+  CC aaa.c
+  CC bbb.c
+returncode = 99

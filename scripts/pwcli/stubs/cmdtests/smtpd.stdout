@@ -1,0 +1,9 @@
+files: ['0']
+test@example.com -> foo@example.com, bar@example.com
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+To: foo@example.com, bar@example.com
+From: test@example.com
+
+msg body

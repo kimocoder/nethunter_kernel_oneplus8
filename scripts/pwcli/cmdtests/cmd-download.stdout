@@ -1,0 +1,53 @@
+Connecting to http://localhost:8105/
+Downloading patches from the server
+User          : test
+Project       : stub-test
+Tree          : data
+Branch        : master
+New           : 19
+Review        : 7
+Upstream      : 0
+Deferred      : 6
+Total         : 32
+master@data > list
+list
+ [  1] [1/7] foo: test 1             - - - -   3d Dino Dinosau Under Review     
+ [  2] [2/7] foo: test 2             - - - -   3d Timo Tiger   Under Review     
+ [  3] [3/7] foo: test 3             - - - -   3d Timo Tiger   Under Review     
+ [  4] [4/7] foo: test 4             - - - -   3d Timo Tiger   Under Review     
+ [  5] [5/7] foo: test 5             - - - -   3d Timo Tiger   Under Review     
+ [  6] [6/7] foo: test 6             - - - -   3d Timo Tiger   Under Review     
+ [  7] [7/7] foo: test 7             - - - -   3d Timo Tiger   Under Review     
+ [  8] foo: small cleanup            - - - -   3d Timo Tiger   Deferred         
+ [  9] foo: utf-8 tèst               - - - -   3d Èd Examplè   Deferred         
+ [ 10] foo: new patch                - - - -   3d Timo Tiger   New              
+ [ 11] foo: minor change with CC     - - - -   2d Timo Tiger   New              
+ [ 12] foo: another minor change.... - - - -   2d Timo Tiger   New              
+ [ 13] [1/15] bar: blah blah blah 1  - - - -   2d Dino Dinosau New              
+ [ 14] [2/15] bar: blah blah blah 2  - - - -   2d Dino Dinosau New              
+ [ 15] [3/15] bar: blah blah blah 3  - - - -   2d Dino Dinosau New              
+ [ 16] [4/15] bar: blah blah blah 4  - - - -   2d Dino Dinosau New              
+ [ 17] [5/15] bar: blah blah blah 5  - - - -   2d Dino Dinosau New              
+ [ 18] [6/15] bar: blah blah blah 6  - - - -   2d Dino Dinosau New              
+ [ 19] [7/15] bar: blah blah blah 7  - - - -   2d Dino Dinosau New              
+ [ 20] [8/15] bar: blah blah blah 8  - - - -   2d Dino Dinosau New              
+ [ 21] [9/15] bar: blah blah blah 9  - - - -   2d Dino Dinosau New              
+ [ 22] [10/15] bar: blah blah bla... - - - -   2d Dino Dinosau New              
+ [ 23] [11/15] bar: blah blah bla... - - - -   2d Dino Dinosau New              
+ [ 24] [12/15] bar: blah blah bla... - - - -   2d Dino Dinosau New              
+ [ 25] [13/15] bar: blah blah bla... - - - -   2d Dino Dinosau New              
+ [ 26] [14/15] bar: blah blah bla... - - - -   2d Dino Dinosau New              
+ [ 27] [15/15] bar: blah blah bla... - - - -   2d Dino Dinosau New              
+ [ 28] [1/4] koo: yyy bbb cc 1       - - - -   2d Dino Dinosau Deferred         
+ [ 29] [2/4] koo: yyy bbb cc 2       - - - -   2d Dino Dinosau Deferred         
+ [ 30] [3/4] koo: yyy bbb cc 3       - - - -   2d Dino Dinosau Deferred         
+ [ 31] [4/4] koo: yyy bbb cc 4       - - - -   2d Dino Dinosau Deferred         
+ [ 32] foo: patch with a really l... - - - -  11h Lasse Really New              
+master@data > download 10-12
+download 10-12
+3 patches written to 1030.mbox
+master@data > quit
+3 messages found from 1030.mbox:
+foo: new patch
+foo: minor change with CC
+foo: another minor change with multiple To

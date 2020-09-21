@@ -1,0 +1,144 @@
+Connecting to http://localhost:8105/
+Downloading patches from the server
+User          : test
+Project       : stub-test
+Tree          : data
+Branch        : master
+New           : 19
+Review        : 7
+Upstream      : 0
+Deferred      : 6
+Total         : 32
+master@data > list review
+list review
+ [  1] [1/7] foo: test 1             - - - -   3d Dino Dinosau Under Review     
+ [  2] [2/7] foo: test 2             - - - -   3d Timo Tiger   Under Review     
+ [  3] [3/7] foo: test 3             - - - -   3d Timo Tiger   Under Review     
+ [  4] [4/7] foo: test 4             - - - -   3d Timo Tiger   Under Review     
+ [  5] [5/7] foo: test 5             - - - -   3d Timo Tiger   Under Review     
+ [  6] [6/7] foo: test 6             - - - -   3d Timo Tiger   Under Review     
+ [  7] [7/7] foo: test 7             - - - -   3d Timo Tiger   Under Review     
+master@data > commit 1-2
+commit 1-2
+Retrieving patches (1/2)Retrieving patches (2/2)
+       [1/7] foo: test 1             - - - -   3d Dino Dinosau Under Review     
+       [2/7] foo: test 2             - - - -   3d Timo Tiger   Under Review     
+------------------------------------------------------------
+2 patches
+commit All/aBort? a
+a
+Committing patches (1/2)Committing patches (2/2)
+                                                                   CC foo.c                                                                   CC bar.c                                                                   CC aaa.c                                                                   CC bbb.c                                                                 Build successful
+============================================================
+2 patches applied:
+
+b50b875961e9 foo: test 1
+bbd3154f2111 foo: test 2
+
+Accepted/Under review/Changes requested/Rejected/New/Deferred/Superseded/aWaitingg upstream/not aPplicable/rFc/aBort? a
+a
+Setting patch state (1/2)Setting patch state (2/2)
+2 patches set to Accepted
+master@data > list -s deferred
+list -s deferred
+ [  1] foo: small cleanup            - - - -   3d Timo Tiger   Deferred         
+ [  2] foo: utf-8 tèst               - - - -   3d Èd Examplè   Deferred         
+ [  3] [1/4] koo: yyy bbb cc 1       - - - -   2d Dino Dinosau Deferred         
+ [  4] [2/4] koo: yyy bbb cc 2       - - - -   2d Dino Dinosau Deferred         
+ [  5] [3/4] koo: yyy bbb cc 3       - - - -   2d Dino Dinosau Deferred         
+ [  6] [4/4] koo: yyy bbb cc 4       - - - -   2d Dino Dinosau Deferred         
+master@data > commit all
+commit all
+Retrieving patches (1/6)Retrieving patches (2/6)Retrieving patches (3/6)Retrieving patches (4/6)Retrieving patches (5/6)Retrieving patches (6/6)
+       foo: small cleanup            - - - -   3d Timo Tiger   Deferred         
+       foo: utf-8 tèst               - - - -   3d Èd Examplè   Deferred         
+       [1/4] koo: yyy bbb cc 1       - - - -   2d Dino Dinosau Deferred         
+       [2/4] koo: yyy bbb cc 2       - - - -   2d Dino Dinosau Deferred         
+       [3/4] koo: yyy bbb cc 3       - - - -   2d Dino Dinosau Deferred         
+       [4/4] koo: yyy bbb cc 4       - - - -   2d Dino Dinosau Deferred         
+------------------------------------------------------------
+6 patches
+commit All/aBort? a
+a
+Committing patches (1/6)Committing patches (2/6)Committing patches (3/6)Committing patches (4/6)Committing patches (5/6)Committing patches (6/6)
+                                                                   CC foo.c                                                                   CC bar.c                                                                   CC aaa.c                                                                   CC bbb.c                                                                 Build successful
+============================================================
+6 patches applied:
+
+7b34ff26d291 foo: small cleanup
+89afb3a96d7c foo: utf-8 tèst
+77f46f632d53 koo: yyy bbb cc 1
+7b0f11a12ef6 koo: yyy bbb cc 2
+df9839f1598b koo: yyy bbb cc 3
+4330b48a225a koo: yyy bbb cc 4
+
+Accepted/Under review/Changes requested/Rejected/New/Deferred/Superseded/aWaitingg upstream/not aPplicable/rFc/aBort? a
+a
+Setting patch state (1/6)Setting patch state (2/6)Setting patch state (3/6)Setting patch state (4/6)Setting patch state (5/6)Setting patch state (6/6)
+6 patches set to Accepted
+master@data > quit
+mail 0:
+----------------------------------------------------------------------
+test@example.com -> dino@example.com, list@example.com
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Subject: Re: [1/7] foo: test 1
+From: Timo Testi <test@example.com>
+In-Reply-To: <11111@example.com>
+References: <11111@example.com>
+To: Dino Dinosaurus <dino@example.com>
+Cc: list@example.com
+User-Agent: pwcli/<censored> (https://github.com/kvalo/pwcli/)
+ Python/<censored>
+
+Dino Dinosaurus <dino@example.com> wrote:
+
+> Foo commit log. Ignore this text
+> 
+> Signed-off-by: Dino Dinosaurus <dino@example.com>
+
+2 patches applied to data.git, thanks.
+
+b50b875961e9 foo: test 1
+bbd3154f2111 foo: test 2
+
+-- 
+Sent by pwcli
+http://localhost/fixme/12345
+----------------------------------------------------------------------
+mail 1:
+----------------------------------------------------------------------
+test@example.com -> timo@example.com, list@example.com
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Subject: Re: foo: small cleanup
+From: Timo Testi <test@example.com>
+In-Reply-To: <22222@example.com>
+References: <22222@example.com>
+To: Timo Tiger <timo@example.com>
+Cc: list@example.com
+User-Agent: pwcli/<censored> (https://github.com/kvalo/pwcli/)
+ Python/<censored>
+
+Timo Tiger <timo@example.com> wrote:
+
+> Foo commit log. Ignore this text
+> 
+> Signed-off-by: Dino Dinosaurus <dino@example.com>
+
+6 patches applied to data.git, thanks.
+
+7b34ff26d291 foo: small cleanup
+89afb3a96d7c foo: utf-8 tèst
+77f46f632d53 koo: yyy bbb cc 1
+7b0f11a12ef6 koo: yyy bbb cc 2
+df9839f1598b koo: yyy bbb cc 3
+4330b48a225a koo: yyy bbb cc 4
+
+-- 
+Sent by pwcli
+http://localhost/fixme/12345
+----------------------------------------------------------------------
+

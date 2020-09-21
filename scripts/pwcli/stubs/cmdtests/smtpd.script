@@ -1,0 +1,77 @@
+#!/usr/bin/env python3
+#
+# Copyright (c) 2015, The Linux Foundation.
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are
+# met:
+#
+# 1. Redistributions of source code must retain the above copyright
+# notice, this list of conditions and the following disclaimer.
+#
+# 2. Redistributions in binary form must reproduce the above copyright
+# notice, this list of conditions and the following disclaimer in the
+# documentation and/or other materials provided with the distribution.
+#
+# 3. Neither the name of the copyright holder nor the names of its
+# contributors may be used to endorse or promote products derived from
+# this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+# "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+# LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+# A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+# HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+# SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+# LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+# DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+# THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+# (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+# OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#
+
+import os
+import os.path
+import sys
+import subprocess
+import time
+
+def main():
+      srcdir = os.environ['SRCDIR']
+      datadir = os.environ['DATADIR']
+      stubdir = os.path.join(srcdir, 'stubs')
+      smtpddir = os.path.join(datadir, 'smtpddir')
+
+      os.chdir(datadir)
+
+      os.mkdir(smtpddir)
+
+      env = os.environ.copy()
+      env['STUB_SMTPD_DATADIR'] = smtpddir
+
+      smtpd = subprocess.Popen([os.path.join(stubdir, 'smtpd'), '--port=4321'],
+                               env=env)
+
+      time.sleep(1)
+
+      subprocess.call([os.path.join(stubdir, 'smtpclient'), '--port=4321'])
+
+      time.sleep(1)
+
+      smtpd.kill()
+
+      # print all the files to make sure there are no extra mails
+      print('files: %s' % os.listdir(smtpddir))
+
+      # cat smtpddir/0
+      mail0 = os.path.join(smtpddir, '0')
+      f = open(mail0, 'r')
+      print(f.read())
+
+      # cleanup
+      os.remove(mail0)
+      os.rmdir(smtpddir)
+
+if __name__ == "__main__":
+      main()

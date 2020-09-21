@@ -1,0 +1,370 @@
+#!/usr/bin/env python3
+#
+# Copyright (c) 2015,2019-2020 The Linux Foundation.
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are
+# met:
+#
+# 1. Redistributions of source code must retain the above copyright
+# notice, this list of conditions and the following disclaimer.
+#
+# 2. Redistributions in binary form must reproduce the above copyright
+# notice, this list of conditions and the following disclaimer in the
+# documentation and/or other materials provided with the distribution.
+#
+# 3. Neither the name of the copyright holder nor the names of its
+# contributors may be used to endorse or promote products derived from
+# this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+# "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+# LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+# A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+# HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+# SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+# LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+# DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+# THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+# (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+# OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#
+
+import argparse
+import sys
+import os
+import os.path
+import email
+import pprint
+import flask
+import flask_restful
+import flask_restful.reqparse
+import json
+import logging
+import mock
+import collections
+
+datadir = None
+
+STATE_MAP = {
+      'New' :                  'new',
+      'Under Review' :         'under-review',
+      'Accepted' :             'accepted',
+      'Rejected' :             'rejected',
+      'RFC' :                  'rfc',
+      'Not Applicable' :       'not-applicaple',
+      'Changes Requested' :    'changes-requested',
+      'Awaiting Upstream' :    'awaiting-upstream',
+      'Superseded' :           'superseded',
+      'Deferred' :             'deferred',
+}
+
+API_PATH = 'api/1.1'
+
+class Patch():
+      hdr_map = {
+            'name': 'Subject',
+            'date': 'Date',
+            'msgid': 'Message-Id',
+            'id': 'X-Patchwork-Id',
+            'project': 'X-Project',
+            'commit_ref': 'X-Commit-Ref',
+            }
+
+      def get_params(self):
+            return self.params
+
+      def get_id(self):
+            return self.params['id']
+
+      def get_state(self):
+            return self.params['state']
+
+      def get_mbox(self):
+            return self.msg.as_string()
+
+      def set(self, params):
+            for k in params:
+                  self.params[k] = params[k]
+
+            self.save()
+
+            return True
+
+      def load(self, filename):
+            # file name is special
+            self.filename = filename
+
+            f = open(self.filename)
+            buf = f.read()
+            f.close()
+
+            self.msg = email.message_from_string(buf)
+
+            for attr in list(self.hdr_map.keys()):
+                  hdr = self.hdr_map[attr]
+                  val = self.msg[hdr]
+                  self.params[attr] = val
+
+            # state names need to be mapped
+            # TODO: the states should be renamed in patches itself so
+            # that this translation could be removed
+            self.params['state'] = STATE_MAP[self.msg['X-State']]
+
+            # REST API uses T to separate date and time
+            # TODO: fix this in the patches itself and remove this translation
+            self.params['date'] = self.params['date'].replace(' ', 'T')
+
+            # hardcode this for now
+            self.params['web_url'] = 'http://localhost/fixme/12345'
+
+            # add submitter.name and submitter.email
+            (name, address) = email.utils.parseaddr(self.msg['From'])
+            self.params['submitter'] = {}
+            self.params['submitter']['name'] = name
+            self.params['submitter']['email'] = address
+
+            # add delegate.username
+            self.params['delegate'] = {}
+            self.params['delegate']['username'] = self.msg['X-Delegate']
+
+            # add mbox attribute
+            self.params['mbox'] = '%smbox/%s' % (self.pws.get_server_url(),
+                                                 self.params['id'])
+
+            # TODO: implement series support
+            self.params['series'] = []
+
+            # TODO: implement pull requests
+            self.params['pull_url'] = None
+
+      def save(self):
+            # update headers in self.msg
+            for attr in list(self.hdr_map.keys()):
+                  hdr = self.hdr_map[attr]
+                  val = self.params[attr]
+                  self.msg.replace_header(hdr, str(val))
+
+            buf = self.msg.as_string()
+
+            f = open(self.filename, 'w')
+            f.write(buf)
+            f.close()
+
+      def __repr__(self):
+            return 'Patch(%s)' % (pprint.pformat(self.params))
+
+      def __init__(self, pws):
+            self.pws = pws
+            self.params = {}
+
+class MainResource(flask_restful.Resource):
+      def get(self):
+            resources = {
+                  'people': 'https://example.com/',
+                  'covers': 'https://example.com/',
+                  'patches': 'https://example.com/',
+                  'projects': 'https://example.com/',
+                  'users': 'https://example.com/',
+                  'series': 'https://example.com/',
+                  'bundles': 'https://example.com/',
+                  'events': 'https://example.com/',
+            }
+
+            return flask.Response(json.dumps(resources), mimetype='application/json')
+
+class MboxResource(flask_restful.Resource):
+      def get(self, id=None):
+            if id is None:
+                  return 'id is missing'
+
+            return flask.Response(self.patches.get_patch(id).get_mbox(),
+                                  mimetype='text/plain')
+
+      def __init__(self, **kwargs):
+        self.patches = kwargs['patches']
+
+class PatchesResource(flask_restful.Resource):
+      # TODO: implement delegate filters for get method
+      # TODO: check that project parameter is correct
+      def get(self, id=None):
+            if id is not None:
+                  # Just one patch requested
+                  try:
+                        return flask.Response(json.dumps(self.patches.get_patch(id).get_params()),
+                                              mimetype='application/json')
+                  except (KeyError):
+                        return 'Patch not found', 404
+
+
+            # for some reason reqparse didn't work with multiple state
+            # parameters so use request.args instead
+            states = flask.request.args.getlist('state')
+
+            j = self.patches.get_all_patches_as_params(states)
+
+            # Return all patches. Need to return using Response
+            # class to avoid escaping hyphens (\") in the json response
+            return flask.Response(json.dumps(j), mimetype='application/json')
+
+      def patch(self, id=None):
+            if id is None:
+                  return 'Patch id missing', 400
+
+            parser = flask_restful.reqparse.RequestParser()
+            parser.add_argument('state', location='json')
+            parser.add_argument('commit_ref', location='json')
+            args = parser.parse_args()
+
+            try:
+                  patch = self.patches.get_patch(id)
+            except (KeyError):
+                  return 'Not found', 404
+
+            patch.set(args)
+
+            return flask.Response(json.dumps(patch.get_params()),
+                                  mimetype='application/json')
+
+      def __init__(self, **kwargs):
+        self.patches = kwargs['patches']
+
+class Patches():
+      def get_patch(self, patch_id):
+            return self.patches[patch_id]
+
+      def get_all_patches_as_params(self, states=None):
+            result = []
+
+            for p in list(self.patches.values()):
+                  if states is not None and p.get_state() not in states:
+                        continue
+
+                  result.append(p.get_params())
+
+            return result
+
+      def __repr__(self):
+            return 'Patches(%s)' % (self.patches)
+
+      def __init__(self, dirname, pws):
+            self.pws = pws
+
+            # use OrderedDict to get consistent output for test scripts
+            self.patches = collections.OrderedDict()
+
+            if not os.path.isdir(dirname):
+                  print('directory %s not found' % dirname)
+                  return
+
+            for dirpath, dirnames, filenames in os.walk(dirname):
+                  for name in sorted(filenames):
+                        # we only use patch files, skip others
+                        if not name.endswith('.patch'):
+                              continue
+
+                        p = Patch(self.pws)
+                        p.load(os.path.join(dirname, name))
+                        self.patches[p.get_id()] = p
+
+class PatchworkStub():
+      def get_server_url(self):
+            return 'http://localhost:%d/%s/' % (self.port, API_PATH)
+
+      def run(self, debug=False):
+            #self.app.logger.removeHandler(flask.logging.default_handler)
+            if not debug:
+                  # don't spam HTTP request information, breaks automatic tests
+                  log = logging.getLogger('werkzeug')
+                  log.setLevel(logging.ERROR)
+
+            self.app.run(port=self.port, debug=debug)
+
+      def __init__(self, patchesdir, port):
+            self.patchesdir = patchesdir
+            self.port = port
+
+            self.patches = Patches(self.patchesdir, self)
+
+            self.app = flask.Flask('patchwork')
+            self.api = flask_restful.Api(self.app)
+
+            self.api.add_resource(MainResource, '/%s/' % (API_PATH))
+            self.api.add_resource(PatchesResource,
+                                  '/%s/patches/' % (API_PATH),
+                                  '/%s/patches/<string:id>/' % (API_PATH),
+                                  resource_class_kwargs={ 'patches': self.patches })
+            self.api.add_resource(MboxResource,
+                                  '/%s/mbox/' % (API_PATH),
+                                  '/%s/mbox/<string:id>' % (API_PATH),
+                                  resource_class_kwargs={ 'patches': self.patches })
+
+def run_test_load_patches(args):
+      pws = mock.Mock()
+      pws.get_server_url = mock.Mock(return_value='http://localhost:8000/1001/')
+      container = Patches(datadir, pws)
+      patches = container.get_all_patches_as_params()
+
+      print(json.dumps(patches, indent=4, sort_keys=True))
+
+def run_test_set_state(args):
+      container = Patches(datadir)
+      patch = container.get_patch(1002)
+
+      patch.set({'state_id': 3})
+      print(patch)
+
+def run_test_get_mbox(args):
+      container = Patches(datadir)
+      patch = container.get_patch(1001)
+
+      print(patch.get_mbox())
+
+def run_test(args):
+      test = args.test[0]
+      if test == 'load-patches':
+            run_test_load_patches(args)
+      elif test == 'set-state':
+            run_test_set_state(args)
+      elif test == 'get-mbox':
+            run_test_get_mbox(args)
+      else:
+            print('unknown test: %s', test)
+
+def main():
+      global datadir
+
+      if 'STUB_PATCHWORK_DATADIR' in os.environ:
+            datadir = os.environ['STUB_PATCHWORK_DATADIR']
+      else:
+            datadir = '.'
+
+      parser = argparse.ArgumentParser(description='patchwork-stub', prog='')
+
+      parser.add_argument('--version', action='store_true')
+      parser.add_argument('--port', action='store', type=int, default=8107)
+      parser.add_argument('--test', nargs=1, help='Run few unit tests')
+      parser.add_argument('--debug', action='store_true',
+                          help='Enable debug messages')
+
+      args = parser.parse_args()
+
+      if args.version:
+            print('stub-patchwork')
+            print('STUB_PATCHWORK_DATADIR=%s' % datadir)
+            sys.exit(0)
+
+      if args.test:
+            run_test(args)
+            sys.exit(0)
+
+      try:
+            stub = PatchworkStub(datadir, port=args.port)
+            stub.run(args.debug)
+      except Exception as e:
+            print('Failed to start PatchworkStub REST server: %s' % e)
+            sys.exit(1)
+
+if __name__ == "__main__":
+      main()

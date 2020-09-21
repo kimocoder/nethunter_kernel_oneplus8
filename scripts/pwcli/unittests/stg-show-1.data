@@ -1,0 +1,28 @@
+commit 8bd453fe60574334173cdbb51faa390b98678063
+Author: Alice Example <alice@example.com>
+Date:   Tue May 30 09:39:58 2017 +0300
+
+    run_tests: add checks suite
+    
+    For now this just runs pyflakes and pep8. Need to extend it later.
+    There should not be any functional changes.
+
+    foo foo bar bar
+    
+    Signed-off-by: Alice Example <alice@example.com>
+    Patchwork-Id: 12345
+    Signed-off-by: Ed Example <ed@example.com>
+
+diff --git a/run_tests b/run_tests
+index 29a542dae2e6..fc833b52c27b 100755
+--- a/run_tests
++++ b/run_tests
+@@ -36,7 +36,7 @@ import subprocess
+ import sys
+ import argparse
+ 
+-SUITES = ('stubs', 'cmdtests', 'unittests')
++SUITES = ('stubs', 'cmdtests', 'unittests', 'checks')
+ 
+ CMDTEST_DIRECTORIES = ['cmdtests', 'stubs/cmdtests']
+ 

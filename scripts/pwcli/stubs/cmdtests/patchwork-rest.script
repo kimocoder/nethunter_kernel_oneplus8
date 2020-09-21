@@ -1,0 +1,99 @@
+#!/usr/bin/env python3
+#
+# Copyright (c) 2016,2020, The Linux Foundation.
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are
+# met:
+#
+# 1. Redistributions of source code must retain the above copyright
+# notice, this list of conditions and the following disclaimer.
+#
+# 2. Redistributions in binary form must reproduce the above copyright
+# notice, this list of conditions and the following disclaimer in the
+# documentation and/or other materials provided with the distribution.
+#
+# 3. Neither the name of the copyright holder nor the names of its
+# contributors may be used to endorse or promote products derived from
+# this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+# "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+# LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+# A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+# HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+# SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+# LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+# DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+# THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+# (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+# OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#
+
+import stubs
+import os
+import requests
+
+PATCHWORK_PORT=8107
+
+def main():
+      #srcdir = os.environ['SRCDIR']
+      datadir = os.environ['DATADIR']
+      #stubdir = os.path.join(srcdir, 'stubs')
+      #patchesdir = os.path.join(datadir, 'patches')
+
+      os.chdir(datadir)
+
+      # start patchwork
+      pw_stub = stubs.PatchworkStub(port=PATCHWORK_PORT)
+      pw_stub.start()
+
+      server_url = 'http://localhost:%d/api/1.1' % (PATCHWORK_PORT)
+      project = 'stub-test'
+      username = 'test'
+      # TODO: add token
+
+      # TODO: the stub server does not support filtering per state yet
+      print('retrieve all patches under review')
+      params = {'project' : project,
+                'delegate' : username,
+                'state' : 'under-review',
+      }
+      r = requests.get('%s/patches/' % (server_url), params=params)
+
+      r.raise_for_status()
+
+      i = 1
+      for patch in r.json():
+            print('[%d] %s\t\t%s' % (i, patch['name'], patch['state']))
+            i += 1
+
+      print()
+
+      print('retrieve patch id 1030')
+      r = requests.get('%s/patches/%s/' % (server_url, 1030))
+
+      r.raise_for_status()
+
+      patch = r.json()
+
+      print('%s: %s' % (patch['id'], patch['name']))
+
+      print()
+
+      print('retrieve patch id 777777 which should not exist')
+      r = requests.get('%s/patches/%s/' % (server_url, 777777))
+
+      print('Response code: %d' % (r.status_code))
+
+      if r.status_code != 404:
+            print('Status code is wrong!')
+
+      print()
+
+      pw_stub.stop()
+      pw_stub.cleanup()
+
+if __name__ == "__main__":
+      main()

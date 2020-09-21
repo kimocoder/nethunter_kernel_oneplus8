@@ -1,0 +1,18 @@
+Connecting to http://localhost:8105/
+Downloading patches from the server
+User          : test
+Project       : stub-test
+Tree          : data
+Branch        : master
+New           : 19
+Review        : 7
+Upstream      : 0
+Deferred      : 6
+Total         : 32
+master@data > 
+
+usage: 
+        {help,quit,q,list,commit,pull,review,show,reply,branch,info,build,stg,download,edit}
+        ...
+: error: the following arguments are required: cmd
+master@data > 

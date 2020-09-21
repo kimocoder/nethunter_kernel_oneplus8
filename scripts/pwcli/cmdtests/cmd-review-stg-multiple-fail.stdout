@@ -1,0 +1,166 @@
+Connecting to http://localhost:8105/
+Downloading patches from the server
+User          : test
+Project       : stub-test
+Tree          : data
+Main branches : master
+Pending branch: pending
+New           : 19
+Review        : 0
+Upstream      : 0
+Deferred      : 6
+Total         : 25
+master@data > list new
+list new
+ [  1] foo: new patch                - - - -   3d Timo Tiger   New              
+ [  2] foo: minor change with CC     - - - -   2d Timo Tiger   New              
+ [  3] foo: another minor change.... - - - -   2d Timo Tiger   New              
+ [  4] [1/15] bar: blah blah blah 1  - - - -   2d Dino Dinosau New              
+ [  5] [2/15] bar: blah blah blah 2  - - - -   2d Dino Dinosau New              
+ [  6] [3/15] bar: blah blah blah 3  - - - -   2d Dino Dinosau New              
+ [  7] [4/15] bar: blah blah blah 4  - - - -   2d Dino Dinosau New              
+ [  8] [5/15] bar: blah blah blah 5  - - - -   2d Dino Dinosau New              
+ [  9] [6/15] bar: blah blah blah 6  - - - -   2d Dino Dinosau New              
+ [ 10] [7/15] bar: blah blah blah 7  - - - -   2d Dino Dinosau New              
+ [ 11] [8/15] bar: blah blah blah 8  - - - -   2d Dino Dinosau New              
+ [ 12] [9/15] bar: blah blah blah 9  - - - -   2d Dino Dinosau New              
+ [ 13] [10/15] bar: blah blah bla... - - - -   2d Dino Dinosau New              
+ [ 14] [11/15] bar: blah blah bla... - - - -   2d Dino Dinosau New              
+ [ 15] [12/15] bar: blah blah bla... - - - -   2d Dino Dinosau New              
+ [ 16] [13/15] bar: blah blah bla... - - - -   2d Dino Dinosau New              
+ [ 17] [14/15] bar: blah blah bla... - - - -   2d Dino Dinosau New              
+ [ 18] [15/15] bar: blah blah bla... - - - -   2d Dino Dinosau New              
+ [ 19] foo: patch with a really l... - - - -  11h Lasse Really New              
+master@data > review 1-5
+review 1-5
+Retrieving patches (1/5)Retrieving patches (2/5)Retrieving patches (3/5)Retrieving patches (4/5)Retrieving patches (5/5)
+       foo: new patch                - - - -   3d Timo Tiger   New              
+       foo: minor change with CC     - - - -   2d Timo Tiger   New              
+       foo: another minor change.... - - - -   2d Timo Tiger   New              
+       [1/15] bar: blah blah blah 1  - - - -   2d Dino Dinosau New              
+       [2/15] bar: blah blah blah 2  - - - -   2d Dino Dinosau New              
+------------------------------------------------------------
+Apply 5 patches to the pending branch? [Apply/Skip/aBort] a
+a
+Importing patches (1/5)Importing patches (2/5)Importing patches (3/5)
+Failed to apply patch: ['stg', 'import', '--mbox', '--sign'] failed: 2
+error: patch failed: drivers/net/wireless/foo/core.c:1714
+error: drivers/net/wireless/foo/core.c: patch does not apply
+error: patch failed: drivers/net/wireless/foo/core.h:635
+error: drivers/net/wireless/foo/core.h: patch does not apply
+error: patch failed: drivers/net/wireless/foo/debug.c:1427
+error: drivers/net/wireless/foo/debug.c: patch does not apply
+error: patch failed: drivers/net/wireless/foo/debug.h:59
+error: drivers/net/wireless/foo/debug.h: patch does not apply
+error: patch failed: drivers/net/wireless/foo/mac.c:6924
+error: drivers/net/wireless/foo/mac.c: patch does not apply
+stg import: Diff does not apply cleanly
+
+Changes requested/Rejected/New/Deferred/Superseded/aWaiting upstream/not aPplicabble/rFc/aBort? c
+c
+Setting patch state (1/5)Setting patch state (2/5)Setting patch state (3/5)Setting patch state (4/5)Setting patch state (5/5)
+5 patches set to Changes Requested
+Reason (RET for no mail): Patch 3 did not apply:
+Patch 3 did not apply:
+============================================================
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Subject: Re: foo: new patch
+From: Timo Testi <test@example.com>
+In-Reply-To: <22222@example.com>
+References: <22222@example.com>
+To: Timo Tiger <timo@example.com>
+Cc: list@example.com
+User-Agent: pwcli/<censored> (https://github.com/kvalo/pwcli/) Python/<censored>
+
+Timo Tiger <timo@example.com> wrote:
+
+> Foo commit log. Ignore this text
+> 
+> Signed-off-by: Dino Dinosaurus <dino@example.com>
+
+Patch 3 did not apply:
+
+error: patch failed: drivers/net/wireless/foo/core.c:1714
+error: drivers/net/wireless/foo/core.c: patch does not apply
+error: patch failed: drivers/net/wireless/foo/core.h:635
+error: drivers/net/wireless/foo/core.h: patch does not apply
+error: patch failed: drivers/net/wireless/foo/debug.c:1427
+error: drivers/net/wireless/foo/debug.c: patch does not apply
+error: patch failed: drivers/net/wireless/foo/debug.h:59
+error: drivers/net/wireless/foo/debug.h: patch does not apply
+error: patch failed: drivers/net/wireless/foo/mac.c:6924
+error: drivers/net/wireless/foo/mac.c: patch does not apply
+stg import: Diff does not apply cleanly
+
+5 patches set to Changes Requested.
+
+1030 foo: new patch
+1031 foo: minor change with CC
+1032 foo: another minor change with multiple To
+1040 [1/15] bar: blah blah blah 1
+1041 [2/15] bar: blah blah blah 2
+
+-- 
+Sent by pwcli
+http://localhost/fixme/12345
+
+
+============================================================
+Envelope From: Timo Testi <test@example.com>
+Envelope To: ['Timo Tiger <timo@example.com>', 'list@example.com']
+Send/Edit/aBort? s
+s
+master@data > list pending
+list pending
+
+master@data > quit
+mail 0:
+----------------------------------------------------------------------
+test@example.com -> timo@example.com, list@example.com
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Subject: Re: foo: new patch
+From: Timo Testi <test@example.com>
+In-Reply-To: <22222@example.com>
+References: <22222@example.com>
+To: Timo Tiger <timo@example.com>
+Cc: list@example.com
+User-Agent: pwcli/<censored> (https://github.com/kvalo/pwcli/)
+ Python/<censored>
+
+Timo Tiger <timo@example.com> wrote:
+
+> Foo commit log. Ignore this text
+> 
+> Signed-off-by: Dino Dinosaurus <dino@example.com>
+
+Patch 3 did not apply:
+
+error: patch failed: drivers/net/wireless/foo/core.c:1714
+error: drivers/net/wireless/foo/core.c: patch does not apply
+error: patch failed: drivers/net/wireless/foo/core.h:635
+error: drivers/net/wireless/foo/core.h: patch does not apply
+error: patch failed: drivers/net/wireless/foo/debug.c:1427
+error: drivers/net/wireless/foo/debug.c: patch does not apply
+error: patch failed: drivers/net/wireless/foo/debug.h:59
+error: drivers/net/wireless/foo/debug.h: patch does not apply
+error: patch failed: drivers/net/wireless/foo/mac.c:6924
+error: drivers/net/wireless/foo/mac.c: patch does not apply
+stg import: Diff does not apply cleanly
+
+5 patches set to Changes Requested.
+
+1030 foo: new patch
+1031 foo: minor change with CC
+1032 foo: another minor change with multiple To
+1040 [1/15] bar: blah blah blah 1
+1041 [2/15] bar: blah blah blah 2
+
+-- 
+Sent by pwcli
+http://localhost/fixme/12345
+----------------------------------------------------------------------
+

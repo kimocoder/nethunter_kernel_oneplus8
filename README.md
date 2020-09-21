@@ -13,6 +13,7 @@ There is a bunch of USB adapters (BT/WIFI/SDR/DVB) added, so below is just a hig
 * Bluetooth (RFCOMM) support added.
 * NTFS read/write
 ```
+
 ## Howto compile/build?
 ```sh
 
@@ -23,6 +24,31 @@ There is a bunch of USB adapters (BT/WIFI/SDR/DVB) added, so below is just a hig
  $ git clone https://github.com/kimocoder/nethunter_kernel_oneplus8 -b nethunter-10.0
  $ cd nethunter_kernel_oneplus8/
  $ ./build.sh
+```
+
+## Simple scripts to manage patches
+```sh
+
+ I have included a set of different scripts to manage imports from 'linux-stable',
+ CodeAurora (Qualcomm (CAF) and Patchwork.
+
+ Planning to merge latest drivers/patches from linux-stable? do;
+
+ $ ./scripts/linux-stable.sh
+
+
+ Planning to pull patches (cherry pick) from Patchwork? do;
+
+ $ ./scripts/pwclient
+
+
+ Keep your WiFi driver (QCACLD-3) up to date the simple way? do;
+ $ ./scripts/qcacld3-setup.sh
+
+ BUT AFTER SETTING THIS UP IN .GIT/CONFIG (REMOTE REPO)
+ you will have to use this update scripts in the future;
+
+ $ ./scripts/qcacld3-update.sh
 ```
 
 

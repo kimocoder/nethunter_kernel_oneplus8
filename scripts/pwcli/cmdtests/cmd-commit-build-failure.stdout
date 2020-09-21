@@ -1,0 +1,118 @@
+Connecting to http://localhost:8105/
+Downloading patches from the server
+User          : test
+Project       : stub-test
+Tree          : data
+Branch        : master
+New           : 19
+Review        : 7
+Upstream      : 0
+Deferred      : 6
+Total         : 32
+master@data > list review
+list review
+ [  1] [1/7] foo: test 1             - - - -   3d Dino Dinosau Under Review     
+ [  2] [2/7] foo: test 2             - - - -   3d Timo Tiger   Under Review     
+ [  3] [3/7] foo: test 3             - - - -   3d Timo Tiger   Under Review     
+ [  4] [4/7] foo: test 4             - - - -   3d Timo Tiger   Under Review     
+ [  5] [5/7] foo: test 5             - - - -   3d Timo Tiger   Under Review     
+ [  6] [6/7] foo: test 6             - - - -   3d Timo Tiger   Under Review     
+ [  7] [7/7] foo: test 7             - - - -   3d Timo Tiger   Under Review     
+master@data > commit 1
+commit 1
+Retrieving patches (1/1)
+       [1/7] foo: test 1             - - - -   3d Dino Dinosau Under Review     
+------------------------------------------------------------
+1 patches
+commit All/aBort? a
+a
+Committing patches (1/1)
+                                                                   CC foo.c                                                                   CC bar.c                                                                   CC aaa.c                                                                   CC bbb.c                                                                 foo.c: warning: is suspicious
+bar.c: warning: is suspicious
+aaa.c: warning: is suspicious
+bbb.c: warning: is suspicious
+Build failed: 1
+============================================================
+1 patches applied:
+
+b50b875961e9 foo: test 1
+
+Accepted/Under review/Changes requested/Rejected/New/Deferred/Superseded/aWaitingg upstream/not aPplicable/rFc/aBort? c
+c
+Setting patch state (1/1)
+Patch set to Changes Requested
+Reason (RET for no mail): Compile errors
+Compile errors
+============================================================
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Subject: Re: [1/7] foo: test 1
+From: Timo Testi <test@example.com>
+In-Reply-To: <11111@example.com>
+References: <11111@example.com>
+To: Dino Dinosaurus <dino@example.com>
+Cc: list@example.com
+User-Agent: pwcli/<censored> (https://github.com/kvalo/pwcli/) Python/<censored>
+
+Dino Dinosaurus <dino@example.com> wrote:
+
+> Foo commit log. Ignore this text
+> 
+> Signed-off-by: Dino Dinosaurus <dino@example.com>
+
+Compile errors
+
+foo.c: warning: is suspicious
+bar.c: warning: is suspicious
+aaa.c: warning: is suspicious
+bbb.c: warning: is suspicious
+
+Patch set to Changes Requested.
+
+-- 
+Sent by pwcli
+http://localhost/fixme/12345
+
+
+============================================================
+Envelope From: Timo Testi <test@example.com>
+Envelope To: ['Dino Dinosaurus <dino@example.com>', 'list@example.com']
+Send/Edit/aBort? s
+s
+master@data > quit
+mail 0:
+----------------------------------------------------------------------
+test@example.com -> dino@example.com, list@example.com
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Subject: Re: [1/7] foo: test 1
+From: Timo Testi <test@example.com>
+In-Reply-To: <11111@example.com>
+References: <11111@example.com>
+To: Dino Dinosaurus <dino@example.com>
+Cc: list@example.com
+User-Agent: pwcli/<censored> (https://github.com/kvalo/pwcli/)
+ Python/<censored>
+
+Dino Dinosaurus <dino@example.com> wrote:
+
+> Foo commit log. Ignore this text
+> 
+> Signed-off-by: Dino Dinosaurus <dino@example.com>
+
+Compile errors
+
+foo.c: warning: is suspicious
+bar.c: warning: is suspicious
+aaa.c: warning: is suspicious
+bbb.c: warning: is suspicious
+
+Patch set to Changes Requested.
+
+-- 
+Sent by pwcli
+http://localhost/fixme/12345
+----------------------------------------------------------------------
+

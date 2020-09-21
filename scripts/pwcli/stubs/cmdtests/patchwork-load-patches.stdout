@@ -1,0 +1,642 @@
+[
+    {
+        "commit_ref": "",
+        "date": "2011-02-11T15:23:31",
+        "delegate": {
+            "username": "test"
+        },
+        "id": "1001",
+        "mbox": "http://localhost:8000/1001/mbox/1001",
+        "msgid": "<11111@example.com>",
+        "name": "[1/7] foo: test 1",
+        "project": "Linux Wireless Mailing List",
+        "pull_url": null,
+        "series": [],
+        "state": "under-review",
+        "submitter": {
+            "email": "dino@example.com",
+            "name": "Dino Dinosaurus"
+        },
+        "web_url": "http://localhost/fixme/12345"
+    },
+    {
+        "commit_ref": "",
+        "date": "2011-02-11T15:23:32",
+        "delegate": {
+            "username": "test"
+        },
+        "id": "1002",
+        "mbox": "http://localhost:8000/1001/mbox/1002",
+        "msgid": "<22222@example.com>",
+        "name": "[2/7] foo: test 2",
+        "project": "Linux Wireless Mailing List",
+        "pull_url": null,
+        "series": [],
+        "state": "under-review",
+        "submitter": {
+            "email": "timo@example.com",
+            "name": "Timo Tiger"
+        },
+        "web_url": "http://localhost/fixme/12345"
+    },
+    {
+        "commit_ref": "",
+        "date": "2011-02-11T15:23:34",
+        "delegate": {
+            "username": "test"
+        },
+        "id": "1003",
+        "mbox": "http://localhost:8000/1001/mbox/1003",
+        "msgid": "<22222@example.com>",
+        "name": "[3/7] foo: test 3",
+        "project": "Linux Wireless Mailing List",
+        "pull_url": null,
+        "series": [],
+        "state": "under-review",
+        "submitter": {
+            "email": "timo@example.com",
+            "name": "Timo Tiger"
+        },
+        "web_url": "http://localhost/fixme/12345"
+    },
+    {
+        "commit_ref": "",
+        "date": "2011-02-11T15:23:34",
+        "delegate": {
+            "username": "test"
+        },
+        "id": "1004",
+        "mbox": "http://localhost:8000/1001/mbox/1004",
+        "msgid": "<22222@example.com>",
+        "name": "[4/7] foo: test 4",
+        "project": "Linux Wireless Mailing List",
+        "pull_url": null,
+        "series": [],
+        "state": "under-review",
+        "submitter": {
+            "email": "timo@example.com",
+            "name": "Timo Tiger"
+        },
+        "web_url": "http://localhost/fixme/12345"
+    },
+    {
+        "commit_ref": "",
+        "date": "2011-02-11T15:23:35",
+        "delegate": {
+            "username": "test"
+        },
+        "id": "1005",
+        "mbox": "http://localhost:8000/1001/mbox/1005",
+        "msgid": "<22222@example.com>",
+        "name": "[5/7] foo: test 5",
+        "project": "Linux Wireless Mailing List",
+        "pull_url": null,
+        "series": [],
+        "state": "under-review",
+        "submitter": {
+            "email": "timo@example.com",
+            "name": "Timo Tiger"
+        },
+        "web_url": "http://localhost/fixme/12345"
+    },
+    {
+        "commit_ref": "",
+        "date": "2011-02-11T15:23:36",
+        "delegate": {
+            "username": "test"
+        },
+        "id": "1006",
+        "mbox": "http://localhost:8000/1001/mbox/1006",
+        "msgid": "<22222@example.com>",
+        "name": "[6/7] foo: test 6",
+        "project": "Linux Wireless Mailing List",
+        "pull_url": null,
+        "series": [],
+        "state": "under-review",
+        "submitter": {
+            "email": "timo@example.com",
+            "name": "Timo Tiger"
+        },
+        "web_url": "http://localhost/fixme/12345"
+    },
+    {
+        "commit_ref": "",
+        "date": "2011-02-11T15:23:36",
+        "delegate": {
+            "username": "test"
+        },
+        "id": "1007",
+        "mbox": "http://localhost:8000/1001/mbox/1007",
+        "msgid": "<22222@example.com>",
+        "name": "[7/7] foo: test 7",
+        "project": "Linux Wireless Mailing List",
+        "pull_url": null,
+        "series": [],
+        "state": "under-review",
+        "submitter": {
+            "email": "timo@example.com",
+            "name": "Timo Tiger"
+        },
+        "web_url": "http://localhost/fixme/12345"
+    },
+    {
+        "commit_ref": "",
+        "date": "2011-02-11T18:00:05",
+        "delegate": {
+            "username": "test"
+        },
+        "id": "1020",
+        "mbox": "http://localhost:8000/1001/mbox/1020",
+        "msgid": "<22222@example.com>",
+        "name": "foo: small cleanup",
+        "project": "Linux Wireless Mailing List",
+        "pull_url": null,
+        "series": [],
+        "state": "deferred",
+        "submitter": {
+            "email": "timo@example.com",
+            "name": "Timo Tiger"
+        },
+        "web_url": "http://localhost/fixme/12345"
+    },
+    {
+        "commit_ref": "",
+        "date": "2011-02-11T18:17:17",
+        "delegate": {
+            "username": "test"
+        },
+        "id": "1021",
+        "mbox": "http://localhost:8000/1001/mbox/1021",
+        "msgid": "<22222@example.com>",
+        "name": "foo: utf-8 t\u00e8st",
+        "project": "Linux Wireless Mailing List",
+        "pull_url": null,
+        "series": [],
+        "state": "deferred",
+        "submitter": {
+            "email": "ed@example.com",
+            "name": "\u00c8d Exampl\u00e8"
+        },
+        "web_url": "http://localhost/fixme/12345"
+    },
+    {
+        "commit_ref": "",
+        "date": "2011-02-11T18:40:01",
+        "delegate": {
+            "username": "test"
+        },
+        "id": "1030",
+        "mbox": "http://localhost:8000/1001/mbox/1030",
+        "msgid": "<22222@example.com>",
+        "name": "foo: new patch",
+        "project": "Linux Wireless Mailing List",
+        "pull_url": null,
+        "series": [],
+        "state": "new",
+        "submitter": {
+            "email": "timo@example.com",
+            "name": "Timo Tiger"
+        },
+        "web_url": "http://localhost/fixme/12345"
+    },
+    {
+        "commit_ref": "",
+        "date": "2011-02-12T09:00:00",
+        "delegate": {
+            "username": "test"
+        },
+        "id": "1031",
+        "mbox": "http://localhost:8000/1001/mbox/1031",
+        "msgid": "<22222@example.com>",
+        "name": "foo: minor change with CC",
+        "project": "Linux Wireless Mailing List",
+        "pull_url": null,
+        "series": [],
+        "state": "new",
+        "submitter": {
+            "email": "timo@example.com",
+            "name": "Timo Tiger"
+        },
+        "web_url": "http://localhost/fixme/12345"
+    },
+    {
+        "commit_ref": "",
+        "date": "2011-02-12T09:10:00",
+        "delegate": {
+            "username": "test"
+        },
+        "id": "1032",
+        "mbox": "http://localhost:8000/1001/mbox/1032",
+        "msgid": "<22222@example.com>",
+        "name": "foo: another minor change with multiple To",
+        "project": "Linux Wireless Mailing List",
+        "pull_url": null,
+        "series": [],
+        "state": "new",
+        "submitter": {
+            "email": "timo@example.com",
+            "name": "Timo Tiger"
+        },
+        "web_url": "http://localhost/fixme/12345"
+    },
+    {
+        "commit_ref": "",
+        "date": "2011-02-12T10:59:59",
+        "delegate": {
+            "username": "test"
+        },
+        "id": "1040",
+        "mbox": "http://localhost:8000/1001/mbox/1040",
+        "msgid": "<11111@example.com>",
+        "name": "[1/15] bar: blah blah blah 1",
+        "project": "Linux Wireless Mailing List",
+        "pull_url": null,
+        "series": [],
+        "state": "new",
+        "submitter": {
+            "email": "dino@example.com",
+            "name": "Dino Dinosaurus"
+        },
+        "web_url": "http://localhost/fixme/12345"
+    },
+    {
+        "commit_ref": "",
+        "date": "2011-02-12T10:59:59",
+        "delegate": {
+            "username": "test"
+        },
+        "id": "1041",
+        "mbox": "http://localhost:8000/1001/mbox/1041",
+        "msgid": "<11111@example.com>",
+        "name": "[2/15] bar: blah blah blah 2",
+        "project": "Linux Wireless Mailing List",
+        "pull_url": null,
+        "series": [],
+        "state": "new",
+        "submitter": {
+            "email": "dino@example.com",
+            "name": "Dino Dinosaurus"
+        },
+        "web_url": "http://localhost/fixme/12345"
+    },
+    {
+        "commit_ref": "",
+        "date": "2011-02-12T11:00:00",
+        "delegate": {
+            "username": "test"
+        },
+        "id": "1042",
+        "mbox": "http://localhost:8000/1001/mbox/1042",
+        "msgid": "<11111@example.com>",
+        "name": "[3/15] bar: blah blah blah 3",
+        "project": "Linux Wireless Mailing List",
+        "pull_url": null,
+        "series": [],
+        "state": "new",
+        "submitter": {
+            "email": "dino@example.com",
+            "name": "Dino Dinosaurus"
+        },
+        "web_url": "http://localhost/fixme/12345"
+    },
+    {
+        "commit_ref": "",
+        "date": "2011-02-12T11:00:00",
+        "delegate": {
+            "username": "test"
+        },
+        "id": "1043",
+        "mbox": "http://localhost:8000/1001/mbox/1043",
+        "msgid": "<11111@example.com>",
+        "name": "[4/15] bar: blah blah blah 4",
+        "project": "Linux Wireless Mailing List",
+        "pull_url": null,
+        "series": [],
+        "state": "new",
+        "submitter": {
+            "email": "dino@example.com",
+            "name": "Dino Dinosaurus"
+        },
+        "web_url": "http://localhost/fixme/12345"
+    },
+    {
+        "commit_ref": "",
+        "date": "2011-02-12T11:00:00",
+        "delegate": {
+            "username": "test"
+        },
+        "id": "1044",
+        "mbox": "http://localhost:8000/1001/mbox/1044",
+        "msgid": "<11111@example.com>",
+        "name": "[5/15] bar: blah blah blah 5",
+        "project": "Linux Wireless Mailing List",
+        "pull_url": null,
+        "series": [],
+        "state": "new",
+        "submitter": {
+            "email": "dino@example.com",
+            "name": "Dino Dinosaurus"
+        },
+        "web_url": "http://localhost/fixme/12345"
+    },
+    {
+        "commit_ref": "",
+        "date": "2011-02-12T11:00:00",
+        "delegate": {
+            "username": "test"
+        },
+        "id": "1045",
+        "mbox": "http://localhost:8000/1001/mbox/1045",
+        "msgid": "<11111@example.com>",
+        "name": "[6/15] bar: blah blah blah 6",
+        "project": "Linux Wireless Mailing List",
+        "pull_url": null,
+        "series": [],
+        "state": "new",
+        "submitter": {
+            "email": "dino@example.com",
+            "name": "Dino Dinosaurus"
+        },
+        "web_url": "http://localhost/fixme/12345"
+    },
+    {
+        "commit_ref": "",
+        "date": "2011-02-12T11:00:00",
+        "delegate": {
+            "username": "test"
+        },
+        "id": "1046",
+        "mbox": "http://localhost:8000/1001/mbox/1046",
+        "msgid": "<11111@example.com>",
+        "name": "[7/15] bar: blah blah blah 7",
+        "project": "Linux Wireless Mailing List",
+        "pull_url": null,
+        "series": [],
+        "state": "new",
+        "submitter": {
+            "email": "dino@example.com",
+            "name": "Dino Dinosaurus"
+        },
+        "web_url": "http://localhost/fixme/12345"
+    },
+    {
+        "commit_ref": "",
+        "date": "2011-02-12T11:00:00",
+        "delegate": {
+            "username": "test"
+        },
+        "id": "1047",
+        "mbox": "http://localhost:8000/1001/mbox/1047",
+        "msgid": "<11111@example.com>",
+        "name": "[8/15] bar: blah blah blah 8",
+        "project": "Linux Wireless Mailing List",
+        "pull_url": null,
+        "series": [],
+        "state": "new",
+        "submitter": {
+            "email": "dino@example.com",
+            "name": "Dino Dinosaurus"
+        },
+        "web_url": "http://localhost/fixme/12345"
+    },
+    {
+        "commit_ref": "",
+        "date": "2011-02-12T11:00:00",
+        "delegate": {
+            "username": "test"
+        },
+        "id": "1048",
+        "mbox": "http://localhost:8000/1001/mbox/1048",
+        "msgid": "<11111@example.com>",
+        "name": "[9/15] bar: blah blah blah 9",
+        "project": "Linux Wireless Mailing List",
+        "pull_url": null,
+        "series": [],
+        "state": "new",
+        "submitter": {
+            "email": "dino@example.com",
+            "name": "Dino Dinosaurus"
+        },
+        "web_url": "http://localhost/fixme/12345"
+    },
+    {
+        "commit_ref": "",
+        "date": "2011-02-12T11:00:00",
+        "delegate": {
+            "username": "test"
+        },
+        "id": "1049",
+        "mbox": "http://localhost:8000/1001/mbox/1049",
+        "msgid": "<11111@example.com>",
+        "name": "[10/15] bar: blah blah blah 10",
+        "project": "Linux Wireless Mailing List",
+        "pull_url": null,
+        "series": [],
+        "state": "new",
+        "submitter": {
+            "email": "dino@example.com",
+            "name": "Dino Dinosaurus"
+        },
+        "web_url": "http://localhost/fixme/12345"
+    },
+    {
+        "commit_ref": "",
+        "date": "2011-02-12T11:00:00",
+        "delegate": {
+            "username": "test"
+        },
+        "id": "1050",
+        "mbox": "http://localhost:8000/1001/mbox/1050",
+        "msgid": "<11111@example.com>",
+        "name": "[11/15] bar: blah blah blah 11",
+        "project": "Linux Wireless Mailing List",
+        "pull_url": null,
+        "series": [],
+        "state": "new",
+        "submitter": {
+            "email": "dino@example.com",
+            "name": "Dino Dinosaurus"
+        },
+        "web_url": "http://localhost/fixme/12345"
+    },
+    {
+        "commit_ref": "",
+        "date": "2011-02-12T11:00:00",
+        "delegate": {
+            "username": "test"
+        },
+        "id": "1051",
+        "mbox": "http://localhost:8000/1001/mbox/1051",
+        "msgid": "<11111@example.com>",
+        "name": "[12/15] bar: blah blah blah 12",
+        "project": "Linux Wireless Mailing List",
+        "pull_url": null,
+        "series": [],
+        "state": "new",
+        "submitter": {
+            "email": "dino@example.com",
+            "name": "Dino Dinosaurus"
+        },
+        "web_url": "http://localhost/fixme/12345"
+    },
+    {
+        "commit_ref": "",
+        "date": "2011-02-12T11:00:00",
+        "delegate": {
+            "username": "test"
+        },
+        "id": "1052",
+        "mbox": "http://localhost:8000/1001/mbox/1052",
+        "msgid": "<11111@example.com>",
+        "name": "[13/15] bar: blah blah blah 13",
+        "project": "Linux Wireless Mailing List",
+        "pull_url": null,
+        "series": [],
+        "state": "new",
+        "submitter": {
+            "email": "dino@example.com",
+            "name": "Dino Dinosaurus"
+        },
+        "web_url": "http://localhost/fixme/12345"
+    },
+    {
+        "commit_ref": "",
+        "date": "2011-02-12T11:00:00",
+        "delegate": {
+            "username": "test"
+        },
+        "id": "1053",
+        "mbox": "http://localhost:8000/1001/mbox/1053",
+        "msgid": "<11111@example.com>",
+        "name": "[14/15] bar: blah blah blah 14",
+        "project": "Linux Wireless Mailing List",
+        "pull_url": null,
+        "series": [],
+        "state": "new",
+        "submitter": {
+            "email": "dino@example.com",
+            "name": "Dino Dinosaurus"
+        },
+        "web_url": "http://localhost/fixme/12345"
+    },
+    {
+        "commit_ref": "",
+        "date": "2011-02-12T11:00:00",
+        "delegate": {
+            "username": "test"
+        },
+        "id": "1054",
+        "mbox": "http://localhost:8000/1001/mbox/1054",
+        "msgid": "<11111@example.com>",
+        "name": "[15/15] bar: blah blah blah 15",
+        "project": "Linux Wireless Mailing List",
+        "pull_url": null,
+        "series": [],
+        "state": "new",
+        "submitter": {
+            "email": "dino@example.com",
+            "name": "Dino Dinosaurus"
+        },
+        "web_url": "http://localhost/fixme/12345"
+    },
+    {
+        "commit_ref": "",
+        "date": "2011-02-12T12:00:00",
+        "delegate": {
+            "username": "test"
+        },
+        "id": "1060",
+        "mbox": "http://localhost:8000/1001/mbox/1060",
+        "msgid": "<11111@example.com>",
+        "name": "[1/4] koo: yyy bbb cc 1",
+        "project": "Linux Wireless Mailing List",
+        "pull_url": null,
+        "series": [],
+        "state": "deferred",
+        "submitter": {
+            "email": "dino@example.com",
+            "name": "Dino Dinosaurus"
+        },
+        "web_url": "http://localhost/fixme/12345"
+    },
+    {
+        "commit_ref": "",
+        "date": "2011-02-12T12:00:01",
+        "delegate": {
+            "username": "test"
+        },
+        "id": "1061",
+        "mbox": "http://localhost:8000/1001/mbox/1061",
+        "msgid": "<11111@example.com>",
+        "name": "[2/4] koo: yyy bbb cc 2",
+        "project": "Linux Wireless Mailing List",
+        "pull_url": null,
+        "series": [],
+        "state": "deferred",
+        "submitter": {
+            "email": "dino@example.com",
+            "name": "Dino Dinosaurus"
+        },
+        "web_url": "http://localhost/fixme/12345"
+    },
+    {
+        "commit_ref": "",
+        "date": "2011-02-12T12:00:02",
+        "delegate": {
+            "username": "test"
+        },
+        "id": "1062",
+        "mbox": "http://localhost:8000/1001/mbox/1062",
+        "msgid": "<11111@example.com>",
+        "name": "[3/4] koo: yyy bbb cc 3",
+        "project": "Linux Wireless Mailing List",
+        "pull_url": null,
+        "series": [],
+        "state": "deferred",
+        "submitter": {
+            "email": "dino@example.com",
+            "name": "Dino Dinosaurus"
+        },
+        "web_url": "http://localhost/fixme/12345"
+    },
+    {
+        "commit_ref": "",
+        "date": "2011-02-12T12:00:02",
+        "delegate": {
+            "username": "test"
+        },
+        "id": "1063",
+        "mbox": "http://localhost:8000/1001/mbox/1063",
+        "msgid": "<11111@example.com>",
+        "name": "[4/4] koo: yyy bbb cc 4",
+        "project": "Linux Wireless Mailing List",
+        "pull_url": null,
+        "series": [],
+        "state": "deferred",
+        "submitter": {
+            "email": "dino@example.com",
+            "name": "Dino Dinosaurus"
+        },
+        "web_url": "http://localhost/fixme/12345"
+    },
+    {
+        "commit_ref": "",
+        "date": "2011-02-20T13:13:13",
+        "delegate": {
+            "username": "test"
+        },
+        "id": "123456789",
+        "mbox": "http://localhost:8000/1001/mbox/123456789",
+        "msgid": "<22222@example.com>",
+        "name": "foo: patch with a really long a name and id so I just need to keep typing and come up with something clever, I'm just not good with that",
+        "project": "Linux Wireless Mailing List",
+        "pull_url": null,
+        "series": [],
+        "state": "new",
+        "submitter": {
+            "email": "lasse@example.com",
+            "name": "Lasse Really Surpringly Long And Complicated Name"
+        },
+        "web_url": "http://localhost/fixme/12345"
+    }
+]

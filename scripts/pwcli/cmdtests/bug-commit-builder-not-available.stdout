@@ -1,0 +1,39 @@
+Connecting to http://localhost:8105/
+Downloading patches from the server
+User          : test
+Project       : stub-test
+Tree          : data
+Branch        : master
+New           : 19
+Review        : 7
+Upstream      : 0
+Deferred      : 6
+Total         : 32
+master@data > list review
+list review
+ [  1] [1/7] foo: test 1             - - - -   3d Dino Dinosau Under Review     
+ [  2] [2/7] foo: test 2             - - - -   3d Timo Tiger   Under Review     
+ [  3] [3/7] foo: test 3             - - - -   3d Timo Tiger   Under Review     
+ [  4] [4/7] foo: test 4             - - - -   3d Timo Tiger   Under Review     
+ [  5] [5/7] foo: test 5             - - - -   3d Timo Tiger   Under Review     
+ [  6] [6/7] foo: test 6             - - - -   3d Timo Tiger   Under Review     
+ [  7] [7/7] foo: test 7             - - - -   3d Timo Tiger   Under Review     
+master@data > commit 1
+commit 1
+Retrieving patches (1/1)
+       [1/7] foo: test 1             - - - -   3d Dino Dinosau Under Review     
+------------------------------------------------------------
+1 patches
+commit All/aBort? a
+a
+Committing patches (1/1)
+============================================================
+1 patches applied:
+
+b50b875961e9 foo: test 1
+
+Accepted/Under review/Changes requested/Rejected/New/Deferred/Superseded/aWaitingg upstream/not aPplicable/rFc/aBort? a
+a
+Setting patch state (1/1)
+Patch set to Accepted
+master@data > quit

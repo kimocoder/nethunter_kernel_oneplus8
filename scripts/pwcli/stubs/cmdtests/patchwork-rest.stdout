@@ -1,0 +1,15 @@
+retrieve all patches under review
+[1] [1/7] foo: test 1		under-review
+[2] [2/7] foo: test 2		under-review
+[3] [3/7] foo: test 3		under-review
+[4] [4/7] foo: test 4		under-review
+[5] [5/7] foo: test 5		under-review
+[6] [6/7] foo: test 6		under-review
+[7] [7/7] foo: test 7		under-review
+
+retrieve patch id 1030
+1030: foo: new patch
+
+retrieve patch id 777777 which should not exist
+Response code: 404
+

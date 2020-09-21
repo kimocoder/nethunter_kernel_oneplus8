@@ -1,0 +1,156 @@
+#!/usr/bin/env python3
+#
+# Copyright (c) 2016, The Linux Foundation.
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are
+# met:
+#
+# 1. Redistributions of source code must retain the above copyright
+# notice, this list of conditions and the following disclaimer.
+#
+# 2. Redistributions in binary form must reproduce the above copyright
+# notice, this list of conditions and the following disclaimer in the
+# documentation and/or other materials provided with the distribution.
+#
+# 3. Neither the name of the copyright holder nor the names of its
+# contributors may be used to endorse or promote products derived from
+# this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+# "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+# LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+# A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+# HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+# SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+# LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+# DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+# THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+# (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+# OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#
+
+import os
+import subprocess
+import sys
+import argparse
+
+SUITES = ('stubs', 'cmdtests', 'unittests', 'checks')
+
+CMDTEST_DIRECTORIES = ['cmdtests', 'stubs/cmdtests']
+
+ACTUAL_PREFIX = '-actual'
+
+def update_cmdtest_outputdir(args, directory):
+    for filename in os.listdir(directory):
+        path = os.path.join(directory, filename)
+        if not path.endswith(ACTUAL_PREFIX):
+            continue
+
+        # skip empty files, cmdtest doesn't need them and the can be discarded
+        if os.stat(path).st_size == 0:
+            continue
+
+        strip = len(ACTUAL_PREFIX)
+        new_name = path[:-strip]
+
+        print('%s -> %s' % (path, new_name))
+        os.rename(path, new_name)
+
+def update_cmdtest_outputs(args):
+    for directory in CMDTEST_DIRECTORIES:
+        update_cmdtest_outputdir(args, directory)
+
+    sys.exit(0)
+
+def main():
+    parser = argparse.ArgumentParser(description='Run all sort of pwcli tests')
+    parser.add_argument('suite', metavar='SUITE', nargs='?',
+                        help='Choose the test suite to run: %s' % (','.join(SUITES)),
+                        choices=SUITES)
+    parser.add_argument('test', metavar='TEST', nargs='*',
+                        help='Run a specific test (or tests) from a test suite')
+    parser.add_argument('--ignore-errors', action='store_true',
+                        help='Continue running tests even if there are errors.')
+    parser.add_argument('--update-outputs', action='store_true',
+                        help='Update cmdtest output files to match the new test output. Run this only when the test outputs have changed as planned and you have verified that the output is as expected.')
+
+    args = parser.parse_args()
+
+    pythonpath = os.path.join(os.getcwd(), 'stubs')
+
+    if 'PYTHONPATH' in os.environ:
+        pythonpath += ':%s' % (os.environ['PYTHONPATH'])
+
+    os.environ['PYTHONPATH'] = pythonpath
+
+    if args.update_outputs:
+        return update_cmdtest_outputs(args)
+
+    if not args.suite or args.suite == 'checks':
+        print('* Running code checkers')
+
+        # TODO: run these checkers on _all_ python scripts in the repo
+
+        returncode = subprocess.call(['pyflakes3', 'pwcli'])
+        if returncode != 0 and not args.ignore_errors:
+            sys.exit(1)
+
+        # ignore E501 long line warnings, not really seeing the
+        # benefit from trying to make lines with user messages short
+        # (just like kernel style works)
+        returncode = subprocess.call(['pep8', '--ignore', 'E501', 'pwcli'])
+        if returncode != 0 and not args.ignore_errors:
+            sys.exit(1)
+
+    if not args.suite or args.suite == 'unittests':
+        print('* Running unit tests')
+
+        os.chdir('unittests')
+        returncode = subprocess.call(['./run'])
+        os.chdir('..')
+
+        if returncode != 0 and not args.ignore_errors:
+            sys.exit(1)
+
+    if not args.suite or args.suite == 'cmdtests':
+        print()
+        print('* Running pwcli cmdtests')
+
+        cmd = ['cmdtest', 'cmdtests']
+
+        for test in args.test:
+            cmd += ['--test', test]
+
+        returncode = subprocess.call(cmd)
+
+        if returncode != 0 and not args.ignore_errors:
+            sys.exit(1)
+
+    if not args.suite or args.suite == 'stubs':
+        print()
+        print('* Running stub cmdtests')
+
+        cmd = ['cmdtest', 'stubs/cmdtests']
+
+        for test in args.test:
+            cmd += ['--test', test]
+
+        returncode = subprocess.call(cmd)
+
+        if returncode != 0 and not args.ignore_errors:
+            sys.exit(1)
+
+    # show OK only when all tests are run and we are not ignoring errors
+    if args.suite or args.ignore_errors:
+        sys.exit(0)
+
+    try:
+        subprocess.check_call(['figlet', '-c', '--', '---- OK ----'])
+    except subprocess.CalledProcessError:
+        # figlet not found
+        print('All tests OK.')
+
+if __name__ == "__main__":
+      main()

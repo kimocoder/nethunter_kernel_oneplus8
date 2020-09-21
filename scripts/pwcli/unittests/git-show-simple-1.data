@@ -1,0 +1,13 @@
+commit 07701d002c8c24e73c6cc51177981ce54fdb2b31
+foo: this is a test for simple format
+
+This format is to simplify commit log parsing. folkafsjdli dfsafaj
+fsjf dkjafd fsfljf adslkj fjkf adfsk laskj fsdlfsa akljsd asfaljs
+
+And this is a fake commit line to make sure we don't parse the wrong
+one:
+
+commit 0000000000000000000000000000000000000000
+
+Patchwork-Id: 12345678
+Signed-off-by: Ed Example <ed@example.com>

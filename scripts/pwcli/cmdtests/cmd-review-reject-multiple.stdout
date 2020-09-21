@@ -1,0 +1,274 @@
+Connecting to http://localhost:8105/
+Downloading patches from the server
+User          : test
+Project       : stub-test
+Tree          : data
+Branch        : master
+New           : 19
+Review        : 7
+Upstream      : 0
+Deferred      : 6
+Total         : 32
+master@data > list review
+list review
+ [  1] [1/7] foo: test 1             - - - -   3d Dino Dinosau Under Review     
+ [  2] [2/7] foo: test 2             - - - -   3d Timo Tiger   Under Review     
+ [  3] [3/7] foo: test 3             - - - -   3d Timo Tiger   Under Review     
+ [  4] [4/7] foo: test 4             - - - -   3d Timo Tiger   Under Review     
+ [  5] [5/7] foo: test 5             - - - -   3d Timo Tiger   Under Review     
+ [  6] [6/7] foo: test 6             - - - -   3d Timo Tiger   Under Review     
+ [  7] [7/7] foo: test 7             - - - -   3d Timo Tiger   Under Review     
+master@data > review 1-2
+review 1-2
+Retrieving patches (1/2)Retrieving patches (2/2)
+       [1/7] foo: test 1             - - - -   3d Dino Dinosau Under Review     
+       [2/7] foo: test 2             - - - -   3d Timo Tiger   Under Review     
+------------------------------------------------------------
+Under review/Changes requested/Rejected/New/Deferred/Superseded/aWaiting upstreamm/not aPplicable/rFc/aBort? r
+r
+Setting patch state (1/2)Setting patch state (2/2)
+2 patches set to Rejected
+Reason (RET for no mail): I will never take these.
+I will never take these.
+============================================================
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Subject: Re: [1/7] foo: test 1
+From: Timo Testi <test@example.com>
+In-Reply-To: <11111@example.com>
+References: <11111@example.com>
+To: Dino Dinosaurus <dino@example.com>
+Cc: list@example.com
+User-Agent: pwcli/<censored> (https://github.com/kvalo/pwcli/) Python/<censored>
+
+Dino Dinosaurus <dino@example.com> wrote:
+
+> Foo commit log. Ignore this text
+> 
+> Signed-off-by: Dino Dinosaurus <dino@example.com>
+
+I will never take these.
+
+2 patches set to Rejected.
+
+1001 [1/7] foo: test 1
+1002 [2/7] foo: test 2
+
+-- 
+Sent by pwcli
+http://localhost/fixme/12345
+
+
+============================================================
+Envelope From: Timo Testi <test@example.com>
+Envelope To: ['Dino Dinosaurus <dino@example.com>', 'list@example.com']
+Send/Edit/aBort? s
+s
+master@data > info
+info
+User          : test
+Project       : stub-test
+Tree          : data
+Branch        : master
+New           : 19
+Review        : 5
+Upstream      : 0
+Deferred      : 6
+Total         : 30
+master@data > list -s new
+list -s new
+ [  1] foo: new patch                - - - -   3d Timo Tiger   New              
+ [  2] foo: minor change with CC     - - - -   2d Timo Tiger   New              
+ [  3] foo: another minor change.... - - - -   2d Timo Tiger   New              
+ [  4] [1/15] bar: blah blah blah 1  - - - -   2d Dino Dinosau New              
+ [  5] [2/15] bar: blah blah blah 2  - - - -   2d Dino Dinosau New              
+ [  6] [3/15] bar: blah blah blah 3  - - - -   2d Dino Dinosau New              
+ [  7] [4/15] bar: blah blah blah 4  - - - -   2d Dino Dinosau New              
+ [  8] [5/15] bar: blah blah blah 5  - - - -   2d Dino Dinosau New              
+ [  9] [6/15] bar: blah blah blah 6  - - - -   2d Dino Dinosau New              
+ [ 10] [7/15] bar: blah blah blah 7  - - - -   2d Dino Dinosau New              
+ [ 11] [8/15] bar: blah blah blah 8  - - - -   2d Dino Dinosau New              
+ [ 12] [9/15] bar: blah blah blah 9  - - - -   2d Dino Dinosau New              
+ [ 13] [10/15] bar: blah blah bla... - - - -   2d Dino Dinosau New              
+ [ 14] [11/15] bar: blah blah bla... - - - -   2d Dino Dinosau New              
+ [ 15] [12/15] bar: blah blah bla... - - - -   2d Dino Dinosau New              
+ [ 16] [13/15] bar: blah blah bla... - - - -   2d Dino Dinosau New              
+ [ 17] [14/15] bar: blah blah bla... - - - -   2d Dino Dinosau New              
+ [ 18] [15/15] bar: blah blah bla... - - - -   2d Dino Dinosau New              
+ [ 19] foo: patch with a really l... - - - -  11h Lasse Really New              
+master@data > review 1-19
+review 1-19
+Retrieving patches (1/19)Retrieving patches (2/19)Retrieving patches (3/19)Retrieving patches (4/19)Retrieving patches (5/19)Retrieving patches (6/19)Retrieving patches (7/19)Retrieving patches (8/19)Retrieving patches (9/19)Retrieving patches (10/19)Retrieving patches (11/19)Retrieving patches (12/19)Retrieving patches (13/19)Retrieving patches (14/19)Retrieving patches (15/19)Retrieving patches (16/19)Retrieving patches (17/19)Retrieving patches (18/19)Retrieving patches (19/19)
+       foo: new patch                - - - -   3d Timo Tiger   New              
+       foo: minor change with CC     - - - -   2d Timo Tiger   New              
+       foo: another minor change.... - - - -   2d Timo Tiger   New              
+       [1/15] bar: blah blah blah 1  - - - -   2d Dino Dinosau New              
+       [2/15] bar: blah blah blah 2  - - - -   2d Dino Dinosau New              
+       [3/15] bar: blah blah blah 3  - - - -   2d Dino Dinosau New              
+       [4/15] bar: blah blah blah 4  - - - -   2d Dino Dinosau New              
+       [5/15] bar: blah blah blah 5  - - - -   2d Dino Dinosau New              
+       [6/15] bar: blah blah blah 6  - - - -   2d Dino Dinosau New              
+       [7/15] bar: blah blah blah 7  - - - -   2d Dino Dinosau New              
+       [8/15] bar: blah blah blah 8  - - - -   2d Dino Dinosau New              
+       [9/15] bar: blah blah blah 9  - - - -   2d Dino Dinosau New              
+       [10/15] bar: blah blah bla... - - - -   2d Dino Dinosau New              
+       [11/15] bar: blah blah bla... - - - -   2d Dino Dinosau New              
+       [12/15] bar: blah blah bla... - - - -   2d Dino Dinosau New              
+       [13/15] bar: blah blah bla... - - - -   2d Dino Dinosau New              
+       [14/15] bar: blah blah bla... - - - -   2d Dino Dinosau New              
+       [15/15] bar: blah blah bla... - - - -   2d Dino Dinosau New              
+       foo: patch with a really l... - - - -  11h Lasse Really New              
+------------------------------------------------------------
+Under review/Changes requested/Rejected/New/Deferred/Superseded/aWaiting upstreamm/not aPplicable/rFc/aBort? c
+c
+Setting patch state (1/19)Setting patch state (2/19)Setting patch state (3/19)Setting patch state (4/19)Setting patch state (5/19)Setting patch state (6/19)Setting patch state (7/19)Setting patch state (8/19)Setting patch state (9/19)Setting patch state (10/19)Setting patch state (11/19)Setting patch state (12/19)Setting patch state (13/19)Setting patch state (14/19)Setting patch state (15/19)Setting patch state (16/19)Setting patch state (17/19)Setting patch state (18/19)Setting patch state (19/19)
+19 patches set to Changes Requested
+Reason (RET for no mail): Please fix your name.
+Please fix your name.
+============================================================
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Subject: Re: foo: new patch
+From: Timo Testi <test@example.com>
+In-Reply-To: <22222@example.com>
+References: <22222@example.com>
+To: Timo Tiger <timo@example.com>
+Cc: list@example.com
+User-Agent: pwcli/<censored> (https://github.com/kvalo/pwcli/) Python/<censored>
+
+Timo Tiger <timo@example.com> wrote:
+
+> Foo commit log. Ignore this text
+> 
+> Signed-off-by: Dino Dinosaurus <dino@example.com>
+
+Please fix your name.
+
+19 patches set to Changes Requested.
+
+1030 foo: new patch
+1031 foo: minor change with CC
+1032 foo: another minor change with multiple To
+1040 [1/15] bar: blah blah blah 1
+1041 [2/15] bar: blah blah blah 2
+1042 [3/15] bar: blah blah blah 3
+1043 [4/15] bar: blah blah blah 4
+1044 [5/15] bar: blah blah blah 5
+1045 [6/15] bar: blah blah blah 6
+1046 [7/15] bar: blah blah blah 7
+1047 [8/15] bar: blah blah blah 8
+1048 [9/15] bar: blah blah blah 9
+1049 [10/15] bar: blah blah blah 10
+1050 [11/15] bar: blah blah blah 11
+1051 [12/15] bar: blah blah blah 12
+1052 [13/15] bar: blah blah blah 13
+1053 [14/15] bar: blah blah blah 14
+1054 [15/15] bar: blah blah blah 15
+123456789 foo: patch with a really long a name and id so I just need to keep typing and come up with something clever, I'm just not good with that
+
+-- 
+Sent by pwcli
+http://localhost/fixme/12345
+
+
+============================================================
+Envelope From: Timo Testi <test@example.com>
+Envelope To: ['Timo Tiger <timo@example.com>', 'list@example.com']
+Send/Edit/aBort? s
+s
+master@data > info
+info
+User          : test
+Project       : stub-test
+Tree          : data
+Branch        : master
+New           : 0
+Review        : 5
+Upstream      : 0
+Deferred      : 6
+Total         : 11
+master@data > quit
+mail 0:
+----------------------------------------------------------------------
+test@example.com -> dino@example.com, list@example.com
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Subject: Re: [1/7] foo: test 1
+From: Timo Testi <test@example.com>
+In-Reply-To: <11111@example.com>
+References: <11111@example.com>
+To: Dino Dinosaurus <dino@example.com>
+Cc: list@example.com
+User-Agent: pwcli/<censored> (https://github.com/kvalo/pwcli/)
+ Python/<censored>
+
+Dino Dinosaurus <dino@example.com> wrote:
+
+> Foo commit log. Ignore this text
+> 
+> Signed-off-by: Dino Dinosaurus <dino@example.com>
+
+I will never take these.
+
+2 patches set to Rejected.
+
+1001 [1/7] foo: test 1
+1002 [2/7] foo: test 2
+
+-- 
+Sent by pwcli
+http://localhost/fixme/12345
+----------------------------------------------------------------------
+mail 1:
+----------------------------------------------------------------------
+test@example.com -> timo@example.com, list@example.com
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Subject: Re: foo: new patch
+From: Timo Testi <test@example.com>
+In-Reply-To: <22222@example.com>
+References: <22222@example.com>
+To: Timo Tiger <timo@example.com>
+Cc: list@example.com
+User-Agent: pwcli/<censored> (https://github.com/kvalo/pwcli/)
+ Python/<censored>
+
+Timo Tiger <timo@example.com> wrote:
+
+> Foo commit log. Ignore this text
+> 
+> Signed-off-by: Dino Dinosaurus <dino@example.com>
+
+Please fix your name.
+
+19 patches set to Changes Requested.
+
+1030 foo: new patch
+1031 foo: minor change with CC
+1032 foo: another minor change with multiple To
+1040 [1/15] bar: blah blah blah 1
+1041 [2/15] bar: blah blah blah 2
+1042 [3/15] bar: blah blah blah 3
+1043 [4/15] bar: blah blah blah 4
+1044 [5/15] bar: blah blah blah 5
+1045 [6/15] bar: blah blah blah 6
+1046 [7/15] bar: blah blah blah 7
+1047 [8/15] bar: blah blah blah 8
+1048 [9/15] bar: blah blah blah 9
+1049 [10/15] bar: blah blah blah 10
+1050 [11/15] bar: blah blah blah 11
+1051 [12/15] bar: blah blah blah 12
+1052 [13/15] bar: blah blah blah 13
+1053 [14/15] bar: blah blah blah 14
+1054 [15/15] bar: blah blah blah 15
+123456789 foo: patch with a really long a name and id so I just need to keep typing and come up with something clever, I'm just not good with that
+
+-- 
+Sent by pwcli
+http://localhost/fixme/12345
+----------------------------------------------------------------------
+
