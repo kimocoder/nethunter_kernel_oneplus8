@@ -527,6 +527,7 @@ kernel/drivers/spi/spi-geni-qcom.ko
 kernel/drivers/spmi/spmi.ko
 kernel/drivers/spmi/spmi-pmic-arb.ko
 kernel/drivers/spmi/spmi-pmic-arb-debug.ko
+kernel/drivers/staging/qcacld-3.0/wlan.ko
 kernel/drivers/staging/rtl8812au/88XXau.ko
 kernel/drivers/staging/wlan-ng/prism2_usb.ko
 kernel/drivers/thermal/thermal_sys.ko

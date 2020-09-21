@@ -1298,7 +1298,7 @@ static int check_version(const struct load_info *info,
 
 	/* No versions at all?  modprobe --force does this. */
 	if (versindex == 0)
-		return try_to_force_load(mod, symname) == 0;
+		//return try_to_force_load(mod, symname) == 0;
 
 	versions = (void *) sechdrs[versindex].sh_addr;
 	num_versions = sechdrs[versindex].sh_size
@@ -3275,8 +3275,8 @@ static int check_module_license_and_versions(struct module *mod)
 	    || (mod->num_unused_gpl_syms && !mod->unused_gpl_crcs)
 #endif
 		) {
-		return try_to_force_load(mod,
-					 "no versions for exported symbols");
+		//return try_to_force_load(mod,
+		//			 "no versions for exported symbols");
 	}
 #endif
 	return 0;
